@@ -1,4 +1,5 @@
 title: Title
-description: Description
-show_downloads: false
+description: Description Here
 theme: jekyll-theme-leap-day
+github:
+is_project_page: false
