@@ -1,5 +1,5 @@
 ///
-/// Threshold by Pixelarity
+/// Vortex by Pixelarity
 /// pixelarity.com | hello@pixelarity.com
 /// License: pixelarity.com/license
 ///
@@ -17,123 +17,64 @@
 			'box-shadow #{_duration(transition)} ease-in-out',
 			'color #{_duration(transition)} ease-in-out'
 		));
-		background-color: _palette(accent3);
-		border-radius: _size(border-radius);
+		background-color: transparent;
+		border-radius: 3rem;
 		border: 0;
-		box-shadow: inset 0px 0px 0px _size(border-width) _palette(accent3-alt);
-		color: _palette(fg-bold) !important;
 		cursor: pointer;
 		display: inline-block;
-		font-family: inherit;
-		font-size: inherit;
 		font-weight: _font(weight-bold);
-		height: _size(element-height);
-		line-height: _size(element-height);
-		overflow: hidden;
-		padding: 0 3.5rem 0 1rem;
-		position: relative;
+		height: 3rem;
+		line-height: calc(3rem - 1px);
+		padding: 0 2rem;
 		text-align: center;
 		text-decoration: none;
 		white-space: nowrap;
 
-		&:after {
-			@include vendor('transition', (
-				'background-color #{_duration(transition)} ease-in-out',
-				'box-shadow #{_duration(transition)} ease-in-out',
-				'color #{_duration(transition)} ease-in-out'
-			));
-			background-color: _palette(accent3-alt);
-			color: _palette(accent3);
-			content: '\f061';
-			font-family: 'Font Awesome 5 Free';
-			font-weight: 900;
-			position: absolute;
-			right: 0;
-			text-align: center;
-			width: 2.5rem;
-		}
-
-		&:hover {
-			background-color: lighten(_palette(accent3), 5);
-			box-shadow: inset 0px 0px 0px _size(border-width) lighten(_palette(accent3-alt), 5);
-
-			&:after {
-				background-color: lighten(_palette(accent3-alt), 5);
-			}
-		}
-
-		&:active {
-			background-color: _palette(accent3);
-			box-shadow: inset 0px 0px 0px _size(border-width) _palette(accent3-alt);
-
-			&:after {
-				background: _palette(accent3-alt);
-				color: _palette(accent3);
-			}
-		}
-
-		&.primary {
-			background-color: _palette(accent1);
-			box-shadow: none;
-			color: _palette(fg-bold) !important;
-
-			&:after {
-				background: _palette(accent1-alt);
-				color: _palette(accent1-dark);
-			}
-
-			&:hover {
-				background-color: _palette(accent1-hover);
-
-				&:after {
-					background: lighten(_palette(accent1-alt), 5);
-				}
-			}
-
-			&:active {
-				background-color: _palette(accent1);
-
-				&:after {
-					background: _palette(accent1-alt);
-					color: _palette(accent1-dark);
-				}
-			}
-		}
-
-		&.small {
-			font-size: 0.8rem;
-			height: _size(element-height) * 0.75;
-			line-height: _size(element-height) * 0.75;
-			padding: 0 3.75rem 0 1.25rem;
-
-			&:after {
-				width: 2.5rem;
-			}
-		}
-
-		&.large {
-			font-size: 1.20rem;
-			height: _size(element-height) * 1.20;
-			line-height: _size(element-height) * 1.20;
-			padding: 0 4.75rem 0 1.5rem;
-
-			&:after {
-				width: 3.25rem;
-			}
-		}
-
-		&.wide {
-			min-width: 13rem;
+		&:before {
+			@include vendor('transition', 'color #{_duration(transition)} ease-in-out');
 		}
 
 		&.icon {
 			&:before {
-				margin-right: 0.5rem;
+				font-size: 0.9rem;
+				margin-right: 0.75rem;
+			}
+		}
+
+		&.next {
+			@include icon(false, solid);
+
+			&:before {
+				content: '\f30b';
+				float: right;
+				line-height: inherit;
+				margin-left: 0.75rem;
 			}
 		}
 
 		&.fit {
 			width: 100%;
+		}
+
+		&.small {
+			font-size: 0.9rem;
+			height: 2.625rem;
+			line-height: calc(2.625rem - 1px);
+			padding: 0 1.5rem;
+
+			&.next {
+				&:before {
+					margin-left: 0.5rem;
+				}
+			}
+		}
+
+		&.large {
+			font-size: 1.125rem;
+			height: 3.5rem;
+			line-height: calc(3.5rem - 1px);
+			padding: 0 2rem;
+			min-width: 8rem;
 		}
 
 		&.disabled,
@@ -142,3 +83,86 @@
 			opacity: 0.25;
 		}
 	}
+
+	input[type="submit"],
+	input[type="reset"],
+	input[type="button"],
+	button {
+		line-height: calc(3rem - 2px);
+
+		&.small {
+			line-height: calc(2.625rem - 2px);
+		}
+	}
+
+	@mixin color-button($p: null) {
+		input[type="submit"],
+		input[type="reset"],
+		input[type="button"],
+		button,
+		.button {
+			$border: null;
+
+			@if ($p == 'invert') {
+				$border: _palette($p, fg-bold);
+			}
+			@else {
+				$border: _palette($p, border);
+			}
+
+			color: _palette($p, fg-bold) !important;
+			box-shadow: inset 0 0 0 3px $border;
+
+			&.icon {
+				&:before {
+					color: $border;
+				}
+			}
+
+			&.next {
+				&:before {
+					color: $border;
+				}
+			}
+
+			&:hover {
+				background-color: transparentize(_palette($p, highlight), 0.9);
+				box-shadow: inset 0 0 0 3px _palette($p, highlight);
+				color: _palette($p, highlight) !important;
+
+				&:before {
+					color: inherit;
+				}
+			}
+
+			&:active {
+				background-color: transparentize(_palette($p, highlight), 0.65);
+				box-shadow: inset 0 0 0 3px _palette($p, highlight);
+				color: _palette($p, highlight) !important;
+
+				&:before {
+					color: inherit;
+				}
+			}
+
+			&.primary {
+				box-shadow: none;
+				background-color: _palette($p, highlight);
+				color: _palette($p, bg) !important;
+
+				&:before {
+					color: transparentize(_palette($p, bg), 0.5);
+				}
+
+				&:hover {
+					background-color: saturate(lighten(_palette($p, highlight), 5), 15);
+				}
+
+				&:active {
+					background-color: saturate(darken(_palette($p, highlight), 5), 2);
+				}
+			}
+		}
+	}
+
+	@include color-button;

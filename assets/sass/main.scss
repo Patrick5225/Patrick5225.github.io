@@ -6,10 +6,10 @@
 @import 'libs/html-grid';
 @import 'libs/fixed-grid';
 @import 'fontawesome-all.min.css';
-@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,400,400i,700,700i');
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,600,900,300italic,600italic,900italic');
 
 /*
-	Threshold by Pixelarity
+	Vortex by Pixelarity
 	pixelarity.com | hello@pixelarity.com
 	License: pixelarity.com/license
 */
@@ -17,14 +17,26 @@
 // Breakpoints.
 
 	@include breakpoints((
-		default:   (1681px,   null     ),
-		xlarge:    (1281px,   1680px   ),
-		large:     (981px,    1280px   ),
-		medium:    (737px,    980px    ),
-		small:     (481px,    736px    ),
-		xsmall:    (361px,    480px    ),
-		xxsmall:   (null,     360px    )
+		xlarge:   ( 1281px,  1680px ),
+		large:    ( 981px,   1280px ),
+		medium:   ( 737px,   980px  ),
+		small:    ( 481px,   736px  ),
+		xsmall:   ( 361px,   480px  ),
+		xxsmall:  ( null,    360px  )
 	));
+
+// Mixins.
+
+	@mixin color($p) {
+		@include color-typography($p);
+		@include color-box($p);
+		@include color-button($p);
+		@include color-form($p);
+		@include color-icon($p);
+		@include color-list($p);
+		@include color-table($p);
+		@include color-features($p);
+	}
 
 // Base.
 
@@ -43,17 +55,36 @@
 	@import 'components/list';
 	@import 'components/actions';
 	@import 'components/icons';
+	@import 'components/section';
 	@import 'components/table';
-	@import 'components/wrapper';
-	@import 'components/inner';
-	@import 'components/header';
-	@import 'components/features-grid';
-	@import 'components/spotlights';
+	@import 'components/banner';
+	@import 'components/features';
+	@import 'components/posts';
+	@import 'components/main';
 
 // Layout.
 
 	@import 'layout/header';
-	@import 'layout/navPanel';
-	@import 'layout/banner';
-	@import 'layout/wrapper';
 	@import 'layout/footer';
+	@import 'layout/wrapper';
+	@import 'layout/navPanel';
+
+	.fx-type {
+		.char {
+			@include vendor('transition', 'all 0.125s ease-in-out');
+			opacity: 1;
+
+			&.inactive {
+				opacity: 0.25;
+				font-weight: _font(weight);
+			}
+		}
+
+		.cursor {
+			opacity: 0.25;
+			font-weight: _font(weight);
+			display: inline-block;
+			width: 2rem;
+			@include vendor('transform', 'scale(1.125)');
+		}
+	}

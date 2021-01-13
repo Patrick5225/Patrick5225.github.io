@@ -1,5 +1,5 @@
 /*
-	Threshold by Pixelarity
+	Vortex by Pixelarity
 	pixelarity.com | hello@pixelarity.com
 	License: pixelarity.com/license
 */
@@ -8,18 +8,16 @@
 
 	var	$window = $(window),
 		$header = $('#header'),
-		$banner = $('#banner'),
 		$body = $('body');
 
 	// Breakpoints.
 		breakpoints({
-			default:   ['1681px',   null       ],
-			xlarge:    ['1281px',   '1680px'   ],
-			large:     ['981px',    '1280px'   ],
-			medium:    ['737px',    '980px'    ],
-			small:     ['481px',    '736px'    ],
-			xsmall:    ['361px',    '480px'    ],
-			xxsmall:   [null,       '360px'    ]
+			xlarge:   [ '1281px',  '1680px' ],
+			large:    [ '981px',   '1280px' ],
+			medium:   [ '737px',   '980px'  ],
+			small:    [ '481px',   '736px'  ],
+			xsmall:   [ '361px',   '480px'  ],
+			xxsmall:  [ null,      '360px'  ]
 		});
 
 	// Play initial animations on page load.
@@ -29,25 +27,30 @@
 			}, 100);
 		});
 
-	// Scrolly.
-		$('.scrolly').scrolly({
-			offset: function() { return $header.height() - 5; }
-		});
+	// Tweaks/fixes.
 
-	// Header.
-		if ($banner.length > 0
-		&&	$header.hasClass('alt')) {
+		// Polyfill: Object fit.
+			if (!browser.canUse('object-fit')) {
 
-			$window.on('resize', function() { $window.trigger('scroll'); });
+				$('.image[data-position]').each(function() {
 
-			$banner.scrollex({
-				bottom:		$header.outerHeight(),
-				terminate:	function() { $header.removeClass('alt'); },
-				enter:		function() { $header.addClass('alt'); },
-				leave:		function() { $header.removeClass('alt'); $header.addClass('reveal'); }
-			});
+					var $this = $(this),
+						$img = $this.children('img');
 
-		}
+					// Apply img as background.
+						$this
+							.css('background-image', 'url("' + $img.attr('src') + '")')
+							.css('background-position', $this.data('position'))
+							.css('background-size', 'cover')
+							.css('background-repeat', 'no-repeat');
+
+					// Hide img.
+						$img
+							.css('opacity', '0');
+
+				});
+
+			}
 
 	// Dropdowns.
 		$('#nav > ul').dropotron({
@@ -57,10 +60,10 @@
 		});
 
 	// Menu.
-		$('<a href="#navPanel" class="navPanelToggle"><span>Menu</span></a>')
+		$('<a href="#navPanel" class="navPanelToggle">Menu</a>')
 			.appendTo($header);
 
-		$( '<div id="navPanel">' +
+		$(	'<div id="navPanel">' +
 				'<nav>' +
 					$('#nav') .navList() +
 				'</nav>' +
@@ -73,8 +76,6 @@
 					hideOnSwipe: true,
 					resetScroll: true,
 					resetForms: true,
-					target: $body,
-					visibleClass: 'is-navPanel-visible',
 					side: 'right'
 				});
 
