@@ -2564,7 +2564,6 @@ input, select, textarea {
 			width: 100%;
 			height: 100%;
 			opacity: 0.75;
-			filter: blur(0.5px);
 		}
 
 		.image[data-position="top left"] img {
