@@ -2681,6 +2681,10 @@ input, select, textarea {
 			top: 0.25rem;
 		}
 
+		p {
+			overflow: hidden;
+		}
+
 		.image.fit {
 			display: block;
 			margin: 0 0 2rem 0;
