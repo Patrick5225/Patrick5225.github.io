@@ -15,6 +15,7 @@
 
 <style>
 	#btnScrollToTop {
+		visibility: hidden;
 		position: fixed;
 		right: 55px;
 		bottom: 25px;
@@ -26,14 +27,16 @@
 </style>
 
 <script>
-	// Hides button until scroll to outline
-	window.onscroll = function () {
-		if (document.body.ScrollTop >= 1000 || document.documentElement.scrollTop > 1000) {
-			document.getElementById("btnScrollToTop").style.visibility = "visible"
-		} else {
-			document.getElementById("btnScrollToTop").style.visibility = "hidden";
-		}
-	};
+	window.
+
+		// Hides button until scroll to outline
+		window.onscroll = function () {
+			if (document.body.ScrollTop >= 1000 || document.documentElement.scrollTop > 1000) {
+				document.getElementById("btnScrollToTop").style.visibility = "visible"
+			} else {
+				document.getElementById("btnScrollToTop").style.visibility = "hidden";
+			}
+		};
 </script>
 
 <body class="is-preload">
@@ -99,7 +102,9 @@
 					<a href="#part-2">
 						<li><u>Looking at ratings and reviews by quantity or average</u></li>
 					</a>
-					<li><u>Observing variations of products</u></li>
+					<a href="#part-3">
+						<li><u>Observing variations of products</u></li>
+					</a>
 					<li><u>Comparing length of reviews vs. ratings</u></li>
 					<li><u>Getting a closer look into what reviews are saying</u></li>
 				</ol>
@@ -297,20 +302,51 @@ sum(is.na(df))</code></pre>
 
 				<!-- Part 2 -->
 				<h2>Part 2: Measuring Ratings and Reviews</h2>
-				<p>Sed lorem lobortis non auctor id, mattis ac quam. Donec dignissim venenatis justo, et semper enim
-					imperdiet sit amet. Sed sodales, libero efficitur dapibus sodales, est libero ullamcorper est, vel
-					viverra elit purus vel nunc. Cras lacinia urna id enim commodo, sed efficitur magna mollis. Quisque
-					velit ligula, rutrum non elit sit amet, scelerisque laoreet lacus. Vivamus in viverra nulla,
-					venenatis posuere dolor. Donec sed dolor non est tempor varius fermentum id enim. Cum sociis natoque
-					penatibus et magnis dis parturient montes, nascetur ridiculus.</p>
-				<p>Magna sed porttitor eget lacus vel, mattis lobortis tortor. Cras sit amet nibh at justo egestas
-					varius. Sed neque magna, sit amet urna eget, maximus ornare nibh. Nullam sit amet cursus erat, id
-					pulvinar turpis. Phasellus nec sapien leo. Proin et ex sit amet eros consectetur mattis at sed
-					magna. Aliquam fringilla, felis eget luctus sollicitudin, ante turpis vulputate risus, nec pharetra
-					massa metus sed ligula.</p>
-				<ul class="actions">
-					<li><a href="#" class="button next">Magna Imperdiet</a></li>
-				</ul>
+				<p><b>How are the ratings distributed for Amazon products?
+						Which rating occurs most often?</b></p>
+				<p>Let's start by looking at a bar chart of the ratings to see what
+					people think of Amazon Alexa products.</p>
+				<span class="image fit">
+					<img src="images/amazon-reviews/ratings-barchart.png" alt="" /></span>
+				<p>There is a large number of people who rated Amazon products with a 5.
+					A rating of a 4 falls second by a large margin compared to ratings
+					of a 5. It seems like the majority of customers who have reviewed
+					the products are satisfied with their purchase.</p>
+				<p><b>How often were reviews written on each month and each day of
+						the week?</b></p>
+				<span class="image fit">
+					<img src="images/amazon-reviews/month-reviews.png" alt="" /></span>
+				<p>Most of the reviews from the data were written on the month of July.
+					This graph could just have been a result of how the data was
+					originally extracted.</p>
+				<span class="image fit">
+					<img src="images/amazon-reviews/day-reviews.png" alt="" /></span>
+				<p>Most reviews were written on Mondays and Sundays. A plausible
+					explanation for this could be that most people order products
+					on Fridays or during the weekend. And since Amazon guarantees
+					a 2-day delivery date for customers who are members of Amazon
+					Prime, people will write their reviews on Sunday or Monday,
+					the same day they receive their delivery.</p>
+				<p><b>What were the average ratings by month or day of week?</b></p>
+				<span class="image fit">
+					<img src="images/amazon-reviews/avg-rating-month.png" alt="" /></span>
+				<p>The average ratings are quite similar to each other, with ratings
+					from each month being higher than 4.00 and July having the highest
+					rating of all months. Though, we should be careful with comparing
+					July to the other months since July had much more reviews than
+					May and June.</p>
+				<span class="image fit">
+					<img src="images/amazon-reviews/avg-rating-day.png" alt="" /></span>
+				<p>Average ratings are all above 4.00 and are not too much different
+					from each other. The highest average ratings occur on the weekend,
+					Monday, and Wednesday, where each ratings are around 4.5. Reviews
+					written on Thursdays and Fridays have the lowest average ratings.</p>
+
+				<span id="part-3"></span>
+				<hr />
+
+				<!-- Part 3 -->
+				<h2>Part 3: Looking at the different variations of Amazon Products</h2>
 
 			</div>
 		</section>
