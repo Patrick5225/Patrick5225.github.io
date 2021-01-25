@@ -13,7 +13,34 @@
 	<link rel="manifest" href="/site.webmanifest">
 </head>
 
+<style>
+	#btnScrollToTop {
+		position: fixed;
+		right: 55px;
+		bottom: 25px;
+		border: none;
+		outline: none;
+		cursor: pointer;
+		z-index: 3;
+	}
+</style>
+
+<script>
+	// Hides button until scroll to outline
+	window.onscroll = function () {
+		if (document.body.ScrollTop >= 1000 || document.documentElement.scrollTop > 1000) {
+			document.getElementById("btnScrollToTop").style.visibility = "visible"
+		} else {
+			document.getElementById("btnScrollToTop").style.visibility = "hidden";
+		}
+	};
+</script>
+
 <body class="is-preload">
+
+	<a href="#top" class="button primary icon solid fa-arrow-up" id="btnScrollToTop">
+		<span>Top</span>
+	</a>
 
 	<!-- Header -->
 	<header id="header">
@@ -27,7 +54,7 @@
 		<nav id="nav">
 			<ul>
 				<li><a href="/">Home</a></li>
-				<li class="current"><a href="amazon-reviews">Projects</a></li>
+				<li class="current"><a href="/#projects">Projects</a></li>
 			</ul>
 		</nav>
 
@@ -39,7 +66,7 @@
 		<!-- Section -->
 		<section class="main style1">
 			<div class="image" data-position="center">
-				<img src="images/amazon_products.png" alt="" />
+				<img src="images/amazon-reviews/amazon_products.png" alt="" />
 			</div>
 			<header class="small">
 				<h1>Amazon Alexa Products Analysis</h1>
@@ -49,7 +76,11 @@
 					products like the Amazon Echo, Amazon TV Sticks, etc. We'll analyze
 					a dataset containing reviews of these Amazon Alexa products and
 					observe what customers think about the products.</p>
+
+				<span id="top"></span>
 			</header>
+
+
 
 			<div class="inner">
 				<p><b>To view the project with all the source code, click
@@ -61,14 +92,19 @@
 
 				<h2>Outline of Analysis:</h2>
 				<ol>
-					<li>Get a high level understanding of the data
-						(shape, columns, data types, range of fields, etc.)</li>
-					<li>Looking at ratings and reviews by quantity or average</li>
-					<li>Observing variations of products</li>
-					<li>Comparing length of reviews vs. ratings</li>
-					<li>Getting a closer look into what reviews are saying</li>
+					<a href="#part-1">
+						<li><u>Get a high level understanding of the data
+								(shape, columns, data types, range of fields, etc.)</u></li>
+					</a>
+					<a href="#part-2">
+						<li><u>Looking at ratings and reviews by quantity or average</u></li>
+					</a>
+					<li><u>Observing variations of products</u></li>
+					<li><u>Comparing length of reviews vs. ratings</u></li>
+					<li><u>Getting a closer look into what reviews are saying</u></li>
 				</ol>
 
+				<span id="part-1"></span>
 				<hr />
 
 				<!--Part 1 -->
@@ -256,9 +292,11 @@ sum(is.na(df))</code></pre>
 				<p>There are no missing values on the data, so we do not have to
 					worry about working with them.</p>
 
+				<span id="part-2"></span>
 				<hr />
 
-				<h3>Phasellus nec sapien laoreet</h3>
+				<!-- Part 2 -->
+				<h2>Part 2: Measuring Ratings and Reviews</h2>
 				<p>Sed lorem lobortis non auctor id, mattis ac quam. Donec dignissim venenatis justo, et semper enim
 					imperdiet sit amet. Sed sodales, libero efficitur dapibus sodales, est libero ullamcorper est, vel
 					viverra elit purus vel nunc. Cras lacinia urna id enim commodo, sed efficitur magna mollis. Quisque
@@ -274,58 +312,6 @@ sum(is.na(df))</code></pre>
 					<li><a href="#" class="button next">Magna Imperdiet</a></li>
 				</ul>
 
-			</div>
-			<div class="inner">
-				<div class="posts">
-					<article>
-						<a href="#" class="image filtered"><img src="images/pic01.jpg" alt="" /></a>
-						<p><strong>Magna feugiat etiam</strong> ipsum dolor tempus amet, magna consectetur. Fusce eu
-							lacus imperdiet.</p>
-						<ul class="actions special">
-							<li><a href="#" class="button small next">Details</a></li>
-						</ul>
-					</article>
-					<article>
-						<a href="#" class="image filtered"><img src="images/pic02.jpg" alt="" /></a>
-						<p><strong>Lorem ipsum dolor</strong> tempus lacus imperdiet cursus sed nisl adipiscing sed
-							dolor.</p>
-						<ul class="actions special">
-							<li><a href="#" class="button small next">Details</a></li>
-						</ul>
-					</article>
-					<article>
-						<a href="#" class="image filtered"><img src="images/pic03.jpg" alt="" /></a>
-						<p><strong>Feugiat tempus</strong> adipiscing sed quisque mattis rhoncus proin, vel mauris
-							dictum nullam.</p>
-						<ul class="actions special">
-							<li><a href="#" class="button small next">Details</a></li>
-						</ul>
-					</article>
-					<article>
-						<a href="#" class="image filtered"><img src="images/pic04.jpg" alt="" /></a>
-						<p><strong>Enim interdum</strong> dignissim sed orci felis, cursus vitae ipsum. Pulvinar ipsum
-							ex fringilla lorem.</p>
-						<ul class="actions special">
-							<li><a href="#" class="button small next">Details</a></li>
-						</ul>
-					</article>
-					<article>
-						<a href="#" class="image filtered"><img src="images/pic05.jpg" alt="" /></a>
-						<p><strong>Mollis euismod</strong> maximus amet faucibus integer, tristique et lacus lobortis
-							ligula viverra lorem.</p>
-						<ul class="actions special">
-							<li><a href="#" class="button small next">Details</a></li>
-						</ul>
-					</article>
-					<article>
-						<a href="#" class="image filtered"><img src="images/pic06.jpg" alt="" /></a>
-						<p><strong>Urna mattis</strong> tempor amet varius lectus, phasellus vel sem elit dignissim
-							sagittis morbi adipiscing.</p>
-						<ul class="actions special">
-							<li><a href="#" class="button small next">Details</a></li>
-						</ul>
-					</article>
-				</div>
 			</div>
 		</section>
 
