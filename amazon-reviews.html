@@ -93,6 +93,10 @@
 					</b>
 				</p>
 
+				<p><b>Data source:</b> <a href="https://www.kaggle.com/sid321axn/amazon-alexa-reviews">
+						https://www.kaggle.com/sid321axn/amazon-alexa-reviews</a>
+				</p>
+
 				<h2>Outline of Analysis:</h2>
 				<ol>
 					<a href="#part-1">
@@ -105,8 +109,12 @@
 					<a href="#part-3">
 						<li><u>Observing variations of products</u></li>
 					</a>
-					<li><u>Comparing length of reviews vs. ratings</u></li>
-					<li><u>Getting a closer look into what reviews are saying</u></li>
+					<a href="#part-4">
+						<li><u>Comparing length of reviews vs. ratings</u></li>
+					</a>
+					<a href="#part-5">
+						<li><u>Getting a closer look into what reviews are saying</u></li>
+					</a>
 				</ol>
 
 				<span id="part-1"></span>
@@ -347,6 +355,102 @@ sum(is.na(df))</code></pre>
 
 				<!-- Part 3 -->
 				<h2>Part 3: Looking at the different variations of Amazon Products</h2>
+				<p>Let's observe if there are any specific variations that customers
+					prefer over the other.</p>
+				<p><b>Which variation are most frequently rated, and which have the
+						highest average rating?</b></p>
+				<span class="image fit">
+					<img src="images/amazon-reviews/variation.png" alt="" /></span>
+				<p>The bar chart shows that customers in the dataset have mostly
+					bought black-colored products.</p>
+				<span class="image fit">
+					<img src="images/amazon-reviews/avg-rating-variation.png" alt="" /></span>
+				<p>All products have average ratings of more than 4.00. Highest
+					average rated products seem to be Walnut Finish and Oak Finish,
+					but note that these products didn't have much reviews to begin
+					with as shown in the bar chart of variation of products. Fabric
+					products are the next highest average rated products and have
+					much more reviews than the Finish products.</p>
+
+				<span id="part-4"></span>
+				<hr />
+
+				<!-- Part 4 -->
+				<h2>Part 4: Length of Reviews</h2>
+				<p><b>What is the distribution of the length of reviews?</b></p>
+				<span class="image fit">
+					<img src="images/amazon-reviews/length-histogram.png" alt="" /></span>
+				<p>Most reviews seems to be below 50 words, but there are some huge
+					outliers with length of reviews beyond 100 words. We can filter
+					out outliers using the Interquartile Range Rule and plot another
+					histogram to better see the distribution of length of reviews.</p>
+				<span class="image fit">
+					<img src="images/amazon-reviews/length-no-outliers-histogram.png" alt="" /></span>
+				<p>We can tell that most reviews are pretty short with word counts of
+					less than 20.</p>
+				<span class="image fit">
+					<img src="images/amazon-reviews/length-boxplot.png" alt="" /></span>
+				<p>Most reviews are short in terms of amount of words it has,
+					regardless of what the rating seems to be. Let's examine the
+					boxplot closer by filtering using the same IQR rule on review
+					length.</p>
+				<span class="image fit">
+					<img src="images/amazon-reviews/length-no-outliers-boxplot.png" alt="" /></span>
+				<p>Reviews rated with a 2 are generally the longest reviews compared
+					to other reviews. Reviews that have a rating of a 5 tends to be
+					the shortest.</p>
+
+				<span id="part-5"></span>
+				<hr />
+
+				<!-- Part 5 -->
+				<h2>Part 5: What are reviews saying?</h2>
+				<p><b>What are some of the most commonly used words in reviews of
+						Amazon products by positive and negative reviews?</b></p>
+				<span class="image fit">
+					<img src="images/amazon-reviews/wordcloud.png" alt="" /></span>
+				<p>In the word cloud above, the most used words are indicated by size.
+					So larger sized words mean higher counts, and smaller sized words
+					mean lower counts. Also, the words are colored by sentiment where
+					the green-colored words are positive words and red-colored words
+					are negative. For the most part, we can see that Amazon products
+					are liked by customers, where they used words such as "love"
+					and "great" in their reviews.</p>
+				<p>Let's see the actual numbers by looking at bar charts of the amount
+					of times these words occur.</p>
+				<span class="image fit">
+					<img src="images/amazon-reviews/top-words.png" alt="" /></span>
+				<p>Words like "love" and "great" do indeed take the top spots for
+					most frequently used positive words in reviews, as we speculated
+					from the word cloud. Moreover, these positive words have high
+					counts, so it seems that Amazon products are doing great
+					overall.</p>
+				<p>If we look at the negative words, we see that there are indeed
+					words that can be considered negative such as "issues" and
+					"problems", but the word "alarm" might be an invalid word
+					to be classified as negative, so this is a word on the bar
+					chart that we should be careful about.</p>
+				<p>Still, the word counts of negative words are quite low, so there
+					seem to be far less customers who said negative things compared
+					to customers who said positive things about the Amazon products
+					in their reviews.</p>
+
+				<hr />
+
+				<!-- Conclusion -->
+				<h2>Conclusion</h2>
+				<p>Overall, it seems like customers are satisfied with their Amazon
+					Alexa products. We measured the ratings and reviews and observed
+					that most reviews gave a rating of 5. Ratings among the variation
+					of products are quite similar to each other and are all doing
+					well. Generally, lower ratings have higher word counts than
+					higher ratings. Also, many reviews have left positive feelings
+					about the Amazon products indicating that the customers loved
+					and think that the products are great. But there are reviews
+					in the other hand that have given negative feedback saying
+					that the customers has issues or problems and are
+					disappointed with their purchase.</p>
+
 
 			</div>
 		</section>
