@@ -656,10 +656,11 @@ music_data['Spotify id'].isnull().sum()</code></pre>
 							</tr>
 						</tbody>
 					</table>
-					<p>6101 rows × 7 columns</p>
-					<pre><code># information about data:
+				</div>
+				<p>6101 rows × 7 columns</p>
+				<pre><code># information about data:
 music_data.info()</code></pre>
-					<pre>&#60class 'pandas.core.frame.DataFrame'>
+				<pre>&#60class 'pandas.core.frame.DataFrame'>
 RangeIndex: 6101 entries, 0 to 6100
 Data columns (total 7 columns):
 #   Column         Non-Null Count  Dtype  
@@ -673,64 +674,64 @@ Data columns (total 7 columns):
 6   Popularity     5690 non-null   float64
 dtypes: float64(1), int64(1), object(5)
 memory usage: 333.8+ KB</pre>
-					<pre><code># check for amount of null values from Spotify id column
+				<pre><code># check for amount of null values from Spotify id column
 music_data['Spotify id'].isnull().sum()</code></pre>
-					<pre>411</pre>
-					<h3>Dealing with the remaining, missing Spotify ids</h3>
-					<p>We dropped the amount of null values from 1151 to 411.
-						At this point, there's nothing else we can do with python
-						to extract the remaining Spotify ids, so the rest must
-						be done manually (using Excel).</p>
+				<pre>411</pre>
+				<h3>Dealing with the remaining, missing Spotify ids</h3>
+				<p>We dropped the amount of null values from 1151 to 411.
+					At this point, there's nothing else we can do with python
+					to extract the remaining Spotify ids, so the rest must
+					be done manually (using Excel).</p>
 
-					<p>Below is the Excel file for <i>spotify_ids.csv</i>.
-						We can see that row 7 (with artist Brenda Lee), for example, has missing
-						information.
-					</p>
-					<span class="image fit2">
-						<img src="images/billboard/excel_start.png" alt="" />
-					</span>
+				<p>Below is the Excel file for <i>spotify_ids.csv</i>.
+					We can see that row 7 (with artist Brenda Lee), for example, has missing
+					information.
+				</p>
+				<span class="image fit2">
+					<img src="images/billboard/excel_start.png" alt="" />
+				</span>
 
-					<p>We can then use Excel's filter tool to filter by rows with
-						missing Spotify ids, and then use Spotify to look up the ids for
-						each of these songs.
-					</p>
-					<span class="image fit2">
-						<img src="images/billboard/excel_finished_ids.png" alt="" />
-					</span>
+				<p>We can then use Excel's filter tool to filter by rows with
+					missing Spotify ids, and then use Spotify to look up the ids for
+					each of these songs.
+				</p>
+				<span class="image fit2">
+					<img src="images/billboard/excel_finished_ids.png" alt="" />
+				</span>
 
-					<p>So most songs should have a Spotify id now. However, in the image
-						below, there are still very few rows with missing information. Also,
-						in column G, some rows have ids that start with "spotify:track:" and other rows
-						without it. We'll add in another column that will remove "spotify:track"
-						in the id, if it exists, and keep all other rows as is with either
-						the original id or blank information using a rather long Excel formula.
-					</p>
-					<span class="image fit2">
-						<img src="images/billboard/excel_blank_confirmation.png" alt="" />
-					</span>
-					<p>To understand the formula used, it checks and searches if the phrase
-						"spotify:track" exists in the cell for G2 or not. If it does,
-						then it will insert the id into a new cell while removing the phrase "spotify:track".
-						If cell G2 does not contain the phrase "spotify:track", then it will check
-						if the cell is blank or not. If the cell is blank, then the new cell will
-						be blank, and if not, then the original id will be inserted into the new cell.
-					</p>
-					<p>As a result of the formula, it will look something like cell I2. We
-						can then use the autofill feature to fill in the rest of the column.
-					</p>
+				<p>So most songs should have a Spotify id now. However, in the image
+					below, there are still very few rows with missing information. Also,
+					in column G, some rows have ids that start with "spotify:track:" and other rows
+					without it. We'll add in another column that will remove "spotify:track"
+					in the id, if it exists, and keep all other rows as is with either
+					the original id or blank information using a rather long Excel formula.
+				</p>
+				<span class="image fit2">
+					<img src="images/billboard/excel_blank_confirmation.png" alt="" />
+				</span>
+				<p>To understand the formula used, it checks and searches if the phrase
+					"spotify:track" exists in the cell for G2 or not. If it does,
+					then it will insert the id into a new cell while removing the phrase "spotify:track".
+					If cell G2 does not contain the phrase "spotify:track", then it will check
+					if the cell is blank or not. If the cell is blank, then the new cell will
+					be blank, and if not, then the original id will be inserted into the new cell.
+				</p>
+				<p>As a result of the formula, it will look something like cell I2. We
+					can then use the autofill feature to fill in the rest of the column.
+				</p>
 
-					<span class="image fit2">
-						<img src="images/billboard/excel_formula.png" alt="" />
-					</span>
+				<span class="image fit2">
+					<img src="images/billboard/excel_formula.png" alt="" />
+				</span>
 
-					<p>After manually inserting Spotify ids and doing some cleaning
-						in Excel, we import the csv file.</p>
-					<pre>
+				<p>After manually inserting Spotify ids and doing some cleaning
+					in Excel, we import the csv file.</p>
+				<pre>
 <code>new_music_data = pd.read_csv('spotify_ids.csv', encoding='ISO-8859-1')</code>
 </pre>
-					<pre><code># information about data
+				<pre><code># information about data
 new_music_data.info()</code></pre>
-					<pre>&#60class 'pandas.core.frame.DataFrame'>
+				<pre>&#60class 'pandas.core.frame.DataFrame'>
 RangeIndex: 6101 entries, 0 to 6100
 Data columns (total 9 columns):
 #   Column         Non-Null Count  Dtype  
@@ -746,8 +747,8 @@ Data columns (total 9 columns):
 8   Spotify id.1   6098 non-null   object 
 dtypes: float64(1), int64(2), object(6)
 memory usage: 429.1+ KB</pre>
-					<pre><code>new_music_data.isnull().sum()</code></pre>
-					<pre>Unnamed: 0         0
+				<pre><code>new_music_data.isnull().sum()</code></pre>
+				<pre>Unnamed: 0         0
 rank               0
 title              0
 artist             0
@@ -757,74 +758,75 @@ Spotify id         3
 Popularity       411
 Spotify id.1       3
 dtype: int64</pre>
-					<p>We see that there are 3 rows without a Spotify id. Let's
-						check what these rows are.
-					</p>
-					<div class="table-wrapper">
-						<table>
-							<thead>
-								<tr>
-									<th></th>
-									<th>Unnamed: 0</th>
-									<th>rank</th>
-									<th>title</th>
-									<th>artist</th>
-									<th>other artists</th>
-									<th>year</th>
-									<th>Spotify id</th>
-									<th>Popularity</th>
-									<th>Spotify id.1</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>2182</td>
-									<td>2182</td>
-									<td>82</td>
-									<td>It's Now or Never</td>
-									<td>John Schneider</td>
-									<td>None</td>
-									<td>1981</td>
-									<td>NaN</td>
-									<td>NaN</td>
-									<td>NaN</td>
-								</tr>
-								<tr>
-									<td>2297</td>
-									<td>2297</td>
-									<td>97</td>
-									<td>Goin' Down</td>
-									<td>Greg Guidry</td>
-									<td>None</td>
-									<td>1982</td>
-									<td>NaN</td>
-									<td>NaN</td>
-									<td>NaN</td>
-								</tr>
-								<tr>
-									<td>3772</td>
-									<td>3772</td>
-									<td>72</td>
-									<td>ESPN Presents The Jock Jam</td>
-									<td>Various Artists</td>
-									<td>None</td>
-									<td>1997</td>
-									<td>NaN</td>
-									<td>NaN</td>
-									<td>NaN</td>
-								</tr>
-							</tbody>
-						</table>
-						<h3>Removing rows with missing information</h3>
-						<p>There are still 3 Spotify ids that are missing.
-							Since these are just a very small portion of our
-							entire dataset, it should be okay to just drop
-							these rows.</p>
-						<p>After dropping the 3 rows, we now have no more rows
-							with missing Spotify ids. We just need to deal with
-							missing Popularity information.</p>
-						<pre><code>new_music_data.isnull().sum()</code></pre>
-						<pre>Unnamed: 0         0
+				<p>We see that there are 3 rows without a Spotify id. Let's
+					check what these rows are.
+				</p>
+				<div class="table-wrapper">
+					<table>
+						<thead>
+							<tr>
+								<th></th>
+								<th>Unnamed: 0</th>
+								<th>rank</th>
+								<th>title</th>
+								<th>artist</th>
+								<th>other artists</th>
+								<th>year</th>
+								<th>Spotify id</th>
+								<th>Popularity</th>
+								<th>Spotify id.1</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>2182</td>
+								<td>2182</td>
+								<td>82</td>
+								<td>It's Now or Never</td>
+								<td>John Schneider</td>
+								<td>None</td>
+								<td>1981</td>
+								<td>NaN</td>
+								<td>NaN</td>
+								<td>NaN</td>
+							</tr>
+							<tr>
+								<td>2297</td>
+								<td>2297</td>
+								<td>97</td>
+								<td>Goin' Down</td>
+								<td>Greg Guidry</td>
+								<td>None</td>
+								<td>1982</td>
+								<td>NaN</td>
+								<td>NaN</td>
+								<td>NaN</td>
+							</tr>
+							<tr>
+								<td>3772</td>
+								<td>3772</td>
+								<td>72</td>
+								<td>ESPN Presents The Jock Jam</td>
+								<td>Various Artists</td>
+								<td>None</td>
+								<td>1997</td>
+								<td>NaN</td>
+								<td>NaN</td>
+								<td>NaN</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<h3>Removing rows with missing information</h3>
+				<p>There are still 3 Spotify ids that are missing.
+					Since these are just a very small portion of our
+					entire dataset, it should be okay to just drop
+					these rows.</p>
+				<p>After dropping the 3 rows, we now have no more rows
+					with missing Spotify ids. We just need to deal with
+					missing Popularity information.</p>
+				<pre><code>new_music_data.isnull().sum()</code></pre>
+				<pre>Unnamed: 0         0
 rank               0
 title              0
 artist             0
@@ -834,153 +836,154 @@ Spotify id         0
 Popularity       408
 Spotify id.1       0
 dtype: int64</pre>
-						<h3>Cleaning dataframe</h3>
-						<p>But first, let's clean the columns with our new dataframe
-							by dropping the index column and old spotify id column,
-							renaming columns, and reordering the columns.
-						</p>
-						<div class="table-wrapper">
-							<table>
-								<thead>
-									<tr>
-										<th></th>
-										<th>rank</th>
-										<th>title</th>
-										<th>artist</th>
-										<th>other artists</th>
-										<th>year</th>
-										<th>Spotify id</th>
-										<th>Popularity</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td>0</td>
-										<td>1</td>
-										<td>Theme from A Summer Place</td>
-										<td>Percy Faith</td>
-										<td>None</td>
-										<td>1960</td>
-										<td>6zwvB879PJSpTyFcg2wwnL</td>
-										<td>57.0</td>
-									</tr>
-									<tr>
-										<td>1</td>
-										<td>2</td>
-										<td>He'll Have to Go</td>
-										<td>Jim Reeves</td>
-										<td>None</td>
-										<td>1960</td>
-										<td>7dDE59NX0n466e705E8Itz</td>
-										<td>18.0</td>
-									</tr>
-									<tr>
-										<td>2</td>
-										<td>3</td>
-										<td>Cathy's Clown</td>
-										<td>The Everly Brothers</td>
-										<td>None</td>
-										<td>1960</td>
-										<td>1MA9StLzlFftLbuqOmoWij</td>
-										<td>52.0</td>
-									</tr>
-									<tr>
-										<td>3</td>
-										<td>4</td>
-										<td>Running Bear</td>
-										<td>Johnny Preston</td>
-										<td>None</td>
-										<td>1960</td>
-										<td>1RYznli2VNO7FCbW1Hq4KM</td>
-										<td>39.0</td>
-									</tr>
-									<tr>
-										<td>4</td>
-										<td>5</td>
-										<td>Teen Angel</td>
-										<td>Mark Dinning</td>
-										<td>None</td>
-										<td>1960</td>
-										<td>36NPEs4S7ik50NrlzaqoIJ</td>
-										<td>31.0</td>
-									</tr>
-									<tr>
-										<td>...</td>
-										<td>...</td>
-										<td>...</td>
-										<td>...</td>
-										<td>...</td>
-										<td>...</td>
-										<td>...</td>
-										<td>...</td>
-									</tr>
-									<tr>
-										<td>6096</td>
-										<td>96</td>
-										<td>More Than My Hometown</td>
-										<td>Morgan Wallen</td>
-										<td>None</td>
-										<td>2020</td>
-										<td>0eBXyY4SatzpE7opnzgXvz</td>
-										<td>83.0</td>
-									</tr>
-									<tr>
-										<td>6097</td>
-										<td>97</td>
-										<td>Lovin' on You</td>
-										<td>Luke Combs</td>
-										<td>None</td>
-										<td>2020</td>
-										<td>0nYvjcSlCgjcwogQAwIwNp</td>
-										<td>76.0</td>
-									</tr>
-									<tr>
-										<td>6098</td>
-										<td>98</td>
-										<td>Said Sum</td>
-										<td>Moneybagg Yo</td>
-										<td>None</td>
-										<td>2020</td>
-										<td>3sKz6Sd72K0ofPWcJPPk6H</td>
-										<td>75.0</td>
-									</tr>
-									<tr>
-										<td>6099</td>
-										<td>99</td>
-										<td>Slide</td>
-										<td>H.E.R.</td>
-										<td>YG</td>
-										<td>2020</td>
-										<td>2rTnVB1bvwxHtaIl4uVu7f</td>
-										<td>77.0</td>
-									</tr>
-									<tr>
-										<td>6100</td>
-										<td>100</td>
-										<td>Walk Em Down</td>
-										<td>NLE Choppa</td>
-										<td>Roddy Ricch</td>
-										<td>2020</td>
-										<td>4cSSL3YafYjM3yjgFO1vJg</td>
-										<td>80.0</td>
-									</tr>
-								</tbody>
-							</table>
-							<p>6098 rows × 7 columns</p>
-							<h3>Filling in the missing popularity data</h3>
-							<p>Let's fill in the missing data with popularity
-								information using Spotify's Web API.
-							</p>
-							<pre><code>popularities = []
+				<h3>Cleaning dataframe</h3>
+				<p>But first, let's clean the columns with our new dataframe
+					by dropping the index column and old spotify id column,
+					renaming columns, and reordering the columns.
+				</p>
+				<div class="table-wrapper">
+					<table>
+						<thead>
+							<tr>
+								<th></th>
+								<th>rank</th>
+								<th>title</th>
+								<th>artist</th>
+								<th>other artists</th>
+								<th>year</th>
+								<th>Spotify id</th>
+								<th>Popularity</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>0</td>
+								<td>1</td>
+								<td>Theme from A Summer Place</td>
+								<td>Percy Faith</td>
+								<td>None</td>
+								<td>1960</td>
+								<td>6zwvB879PJSpTyFcg2wwnL</td>
+								<td>57.0</td>
+							</tr>
+							<tr>
+								<td>1</td>
+								<td>2</td>
+								<td>He'll Have to Go</td>
+								<td>Jim Reeves</td>
+								<td>None</td>
+								<td>1960</td>
+								<td>7dDE59NX0n466e705E8Itz</td>
+								<td>18.0</td>
+							</tr>
+							<tr>
+								<td>2</td>
+								<td>3</td>
+								<td>Cathy's Clown</td>
+								<td>The Everly Brothers</td>
+								<td>None</td>
+								<td>1960</td>
+								<td>1MA9StLzlFftLbuqOmoWij</td>
+								<td>52.0</td>
+							</tr>
+							<tr>
+								<td>3</td>
+								<td>4</td>
+								<td>Running Bear</td>
+								<td>Johnny Preston</td>
+								<td>None</td>
+								<td>1960</td>
+								<td>1RYznli2VNO7FCbW1Hq4KM</td>
+								<td>39.0</td>
+							</tr>
+							<tr>
+								<td>4</td>
+								<td>5</td>
+								<td>Teen Angel</td>
+								<td>Mark Dinning</td>
+								<td>None</td>
+								<td>1960</td>
+								<td>36NPEs4S7ik50NrlzaqoIJ</td>
+								<td>31.0</td>
+							</tr>
+							<tr>
+								<td>...</td>
+								<td>...</td>
+								<td>...</td>
+								<td>...</td>
+								<td>...</td>
+								<td>...</td>
+								<td>...</td>
+								<td>...</td>
+							</tr>
+							<tr>
+								<td>6096</td>
+								<td>96</td>
+								<td>More Than My Hometown</td>
+								<td>Morgan Wallen</td>
+								<td>None</td>
+								<td>2020</td>
+								<td>0eBXyY4SatzpE7opnzgXvz</td>
+								<td>83.0</td>
+							</tr>
+							<tr>
+								<td>6097</td>
+								<td>97</td>
+								<td>Lovin' on You</td>
+								<td>Luke Combs</td>
+								<td>None</td>
+								<td>2020</td>
+								<td>0nYvjcSlCgjcwogQAwIwNp</td>
+								<td>76.0</td>
+							</tr>
+							<tr>
+								<td>6098</td>
+								<td>98</td>
+								<td>Said Sum</td>
+								<td>Moneybagg Yo</td>
+								<td>None</td>
+								<td>2020</td>
+								<td>3sKz6Sd72K0ofPWcJPPk6H</td>
+								<td>75.0</td>
+							</tr>
+							<tr>
+								<td>6099</td>
+								<td>99</td>
+								<td>Slide</td>
+								<td>H.E.R.</td>
+								<td>YG</td>
+								<td>2020</td>
+								<td>2rTnVB1bvwxHtaIl4uVu7f</td>
+								<td>77.0</td>
+							</tr>
+							<tr>
+								<td>6100</td>
+								<td>100</td>
+								<td>Walk Em Down</td>
+								<td>NLE Choppa</td>
+								<td>Roddy Ricch</td>
+								<td>2020</td>
+								<td>4cSSL3YafYjM3yjgFO1vJg</td>
+								<td>80.0</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<p>6098 rows × 7 columns</p>
+				<h3>Filling in the missing popularity data</h3>
+				<p>Let's fill in the missing data with popularity
+					information using Spotify's Web API.
+				</p>
+				<pre><code>popularities = []
 
 for id_ in new_music_data['Spotify id']:
 	feature = sp.track(id_)['popularity']
 	popularities.append(feature)
 
 new_music_data['Popularity'] = popularities</code></pre>
-							<pre><code># count amount of missing values
+				<pre><code># count amount of missing values
 new_music_data.isnull().sum()</code></pre>
-							<pre>rank             0
+				<pre>rank             0
 title            0
 artist           0
 other artists    0
@@ -988,18 +991,1095 @@ year             0
 Spotify id       0
 Popularity       0
 dtype: int64</pre>
-							<p>There are no more missing values in our dataframe, so
-								let's go ahead and save this into our csv file called
-								<i>spotify_ids.csv.</i>
-							</p>
+				<p>There are no more missing values in our dataframe, so
+					let's go ahead and save this into our csv file called
+					<i>spotify_ids.csv.</i>
+				</p>
 
-							<span id="part-3"></span>
-							<hr />
+				<span id="part-3"></span>
+				<hr />
 
-							<h2>Part 3: Extracting Spotify Audio Features
-								(using Spotify's API) to add even more data</h2>
+				<!-- Part 3 -->
+				<h2>Part 3: Extracting Spotify Audio Features
+					(using Spotify's API) to add even more data</h2>
+				<p>Our dataset currently has some information about each song
+					title such as artists, Spotify id, and popularity, but
+					there's a lot more features that we can add on to each
+					of the songs in our dataset. Luckily, Spotify has
+					audio features available for each song, so we will
+					extract the audio features with Spotify's Web API.</p>
+				<p>More info on Spotify's audio features:
+					<a href="https://developer.spotify.com/documentation/web-api/reference/tracks/get-audio-features/">
+						https://developer.spotify.com/documentation/web-api/reference/tracks/get-audio-features/</a>
+				<h3>Setup</h3>
+				<pre><code>import pandas as pd
 
-						</div>
+import spotipy # for Spotify's Web API
+from spotipy.oauth2 import SpotifyClientCredentials</code></pre>
+				<h3>Read csv file</h3>
+				<pre><code># read the csv file containing each song information
+music_data = pd.read_csv('spotify_ids.csv', encoding='ISO-8859-1')
+music_data.drop('Unnamed: 0',axis=1,inplace=True)</code></pre>
+				<pre><code>music_data</code></pre>
+				<div class="table-wrapper">
+					<table>
+						<thead>
+							<tr>
+								<th></th>
+								<th>rank</th>
+								<th>title</th>
+								<th>artist</th>
+								<th>other artists</th>
+								<th>year</th>
+								<th>Spotify id</th>
+								<th>Popularity</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>0</td>
+								<td>1</td>
+								<td>Theme from A Summer Place</td>
+								<td>Percy Faith</td>
+								<td>None</td>
+								<td>1960</td>
+								<td>6zwvB879PJSpTyFcg2wwnL</td>
+								<td>57</td>
+							</tr>
+							<tr>
+								<td>1</td>
+								<td>2</td>
+								<td>He'll Have to Go</td>
+								<td>Jim Reeves</td>
+								<td>None</td>
+								<td>1960</td>
+								<td>7dDE59NX0n466e705E8Itz</td>
+								<td>18</td>
+							</tr>
+							<tr>
+								<td>2</td>
+								<td>3</td>
+								<td>Cathy's Clown</td>
+								<td>The Everly Brothers</td>
+								<td>None</td>
+								<td>1960</td>
+								<td>1MA9StLzlFftLbuqOmoWij</td>
+								<td>52</td>
+							</tr>
+							<tr>
+								<td>3</td>
+								<td>4</td>
+								<td>Running Bear</td>
+								<td>Johnny Preston</td>
+								<td>None</td>
+								<td>1960</td>
+								<td>1RYznli2VNO7FCbW1Hq4KM</td>
+								<td>39</td>
+							</tr>
+							<tr>
+								<td>4</td>
+								<td>5</td>
+								<td>Teen Angel</td>
+								<td>Mark Dinning</td>
+								<td>None</td>
+								<td>1960</td>
+								<td>36NPEs4S7ik50NrlzaqoIJ</td>
+								<td>31</td>
+							</tr>
+							<tr>
+								<td>...</td>
+								<td>...</td>
+								<td>...</td>
+								<td>...</td>
+								<td>...</td>
+								<td>...</td>
+								<td>...</td>
+								<td>...</td>
+							</tr>
+							<tr>
+								<td>6096</td>
+								<td>96</td>
+								<td>More Than My Hometown</td>
+								<td>Morgan Wallen</td>
+								<td>None</td>
+								<td>2020</td>
+								<td>0eBXyY4SatzpE7opnzgXvz</td>
+								<td>83</td>
+							</tr>
+							<tr>
+								<td>6097</td>
+								<td>97</td>
+								<td>Lovin' on You</td>
+								<td>Luke Combs</td>
+								<td>None</td>
+								<td>2020</td>
+								<td>0nYvjcSlCgjcwogQAwIwNp</td>
+								<td>76</td>
+							</tr>
+							<tr>
+								<td>6098</td>
+								<td>98</td>
+								<td>Said Sum</td>
+								<td>Moneybagg Yo</td>
+								<td>None</td>
+								<td>2020</td>
+								<td>3sKz6Sd72K0ofPWcJPPk6H</td>
+								<td>75</td>
+							</tr>
+							<tr>
+								<td>6099</td>
+								<td>99</td>
+								<td>Slide</td>
+								<td>H.E.R.</td>
+								<td>YG</td>
+								<td>2020</td>
+								<td>2rTnVB1bvwxHtaIl4uVu7f</td>
+								<td>77</td>
+							</tr>
+							<tr>
+								<td>6100</td>
+								<td>100</td>
+								<td>Walk Em Down</td>
+								<td>NLE Choppa</td>
+								<td>Roddy Ricch</td>
+								<td>2020</td>
+								<td>4cSSL3YafYjM3yjgFO1vJg</td>
+								<td>80</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<p>6098 x 7 columns</p>
+				<h3>Extracting Audio Features</h3>
+				<p>Now that we have everything set up, let's take a look
+					at what audio features are available from Spotify.
+					We'll test this out on a song from our dataframe.
+					We'll choose the first song from our dataframe
+					called "Theme from a Summer Place" by Percy
+					Faith. To get the audio features, we'll need
+					to use its Spotify id.</p>
+				<pre><code># grab spotify id of song
+song_id = music_data.loc[0]['Spotify id']
+print(song_id)</code></pre>
+				<pre>6zwvB879PJSpTyFcg2wwnL</pre>
+				<pre><code># extract audio features for our chosen song
+sp.audio_features(song_id)</code></pre>
+				<pre>[{'danceability': 0.326,
+'energy': 0.326,
+'key': 0,
+'loudness': -15.144,
+'mode': 1,
+'speechiness': 0.0297,
+'acousticness': 0.591,
+'instrumentalness': 0.918,
+'liveness': 0.494,
+'valence': 0.87,
+'tempo': 186.232,
+'type': 'audio_features',
+'id': '6zwvB879PJSpTyFcg2wwnL',
+'uri': 'spotify:track:6zwvB879PJSpTyFcg2wwnL',
+'track_href': 'https://api.spotify.com/v1/tracks/6zwvB879PJSpTyFcg2wwnL',
+'analysis_url': 'https://api.spotify.com/v1/audio-analysis/6zwvB879PJSpTyFcg2wwnL',
+'duration_ms': 142693,
+'time_signature': 3}]</pre>
+				<p>We were sucessfully able to get the audio features
+					for a song, along with initializing a dictionary
+					that will store each audio feature and its value.
+					Let's get the audio features for all the
+					songs in our data.</p>
+				<h3>Final look at dataframe</h3>
+				<p>After having all the audio features and cleaning
+					all the data, we end up with our final dataframe.
+				</p>
+				<div class="table-wrapper">
+					<table>
+						<thead>
+							<tr>
+								<th></th>
+								<th>rank</th>
+								<th>title</th>
+								<th>artist</th>
+								<th>other artists</th>
+								<th>year</th>
+								<th>Spotify id</th>
+								<th>Popularity</th>
+								<th>danceability</th>
+								<th>energy</th>
+								<th>key</th>
+								<th>loudness</th>
+								<th>mode</th>
+								<th>speechiness</th>
+								<th>acousticness</th>
+								<th>instrumentalness</th>
+								<th>liveness</th>
+								<th>valence</th>
+								<th>tempo</th>
+								<th>duration</th>
+								<th>time_signature</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>0</td>
+								<td>1</td>
+								<td>Theme from A Summer Place</td>
+								<td>Percy Faith</td>
+								<td>None</td>
+								<td>1960</td>
+								<td>6zwvB879PJSpTyFcg2wwnL</td>
+								<td>57</td>
+								<td>0.326</td>
+								<td>0.3260</td>
+								<td>0</td>
+								<td>-15.144</td>
+								<td>1</td>
+								<td>0.0297</td>
+								<td>0.59100</td>
+								<td>0.918000</td>
+								<td>0.4940</td>
+								<td>0.870</td>
+								<td>186.232</td>
+								<td>142.693</td>
+								<td>3</td>
+							</tr>
+							<tr>
+								<td>1</td>
+								<td>2</td>
+								<td>He'll Have to Go</td>
+								<td>Jim Reeves</td>
+								<td>None</td>
+								<td>1960</td>
+								<td>7dDE59NX0n466e705E8Itz</td>
+								<td>18</td>
+								<td>0.469</td>
+								<td>0.2440</td>
+								<td>1</td>
+								<td>-15.702</td>
+								<td>1</td>
+								<td>0.0357</td>
+								<td>0.97400</td>
+								<td>0.016200</td>
+								<td>0.8450</td>
+								<td>0.577</td>
+								<td>88.271</td>
+								<td>134.333</td>
+								<td>3</td>
+							</tr>
+							<tr>
+								<td>...</td>
+								<td>...</td>
+								<td>...</td>
+								<td>...</td>
+								<td>...</td>
+								<td>...</td>
+								<td>...</td>
+								<td>...</td>
+								<td>...</td>
+								<td>...</td>
+								<td>...</td>
+								<td>...</td>
+								<td>...</td>
+								<td>...</td>
+								<td>...</td>
+								<td>...</td>
+								<td>...</td>
+								<td>...</td>
+								<td>...</td>
+								<td>...</td>
+								<td>...</td>
+							</tr>
+							<tr>
+								<td>6099</td>
+								<td>99</td>
+								<td>Slide</td>
+								<td>H.E.R.</td>
+								<td>YG</td>
+								<td>2020</td>
+								<td>2rTnVB1bvwxHtaIl4uVu7f</td>
+								<td>77</td>
+								<td>0.827</td>
+								<td>0.4690</td>
+								<td>10</td>
+								<td>-9.141</td>
+								<td>0</td>
+								<td>0.3410</td>
+								<td>0.08070</td>
+								<td>0.000008</td>
+								<td>0.2070</td>
+								<td>0.196</td>
+								<td>97.028</td>
+								<td>238.321</td>
+								<td>4</td>
+							</tr>
+							<tr>
+								<td>6100</td>
+								<td>100</td>
+								<td>Walk Em Down</td>
+								<td>NLE Choppa</td>
+								<td>Roddy Ricch</td>
+								<td>2020</td>
+								<td>4cSSL3YafYjM3yjgFO1vJg</td>
+								<td>80</td>
+								<td>0.867</td>
+								<td>0.7440</td>
+								<td>2</td>
+								<td>-5.171</td>
+								<td>1</td>
+								<td>0.2270</td>
+								<td>0.26800</td>
+								<td>0.000000</td>
+								<td>0.0713</td>
+								<td>0.645</td>
+								<td>84.005</td>
+								<td>173.288</td>
+								<td>4</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<p></p>
+				<pre><code>music_data.info()</code></pre>
+				<pre>&#60class 'pandas.core.frame.DataFrame'>
+RangeIndex: 6098 entries, 0 to 6097
+Data columns (total 20 columns):
+#   Column            Non-Null Count  Dtype
+---  ------            --------------  -----
+0   rank              6098 non-null   object
+1   title             6098 non-null   object
+2   artist            6098 non-null   object
+3   other artists     6098 non-null   object
+4   year              6098 non-null   int64
+5   Spotify id        6098 non-null   object 
+6   Popularity        6098 non-null   int64  
+7   danceability      6098 non-null   float64
+8   energy            6098 non-null   float64
+9   key               6098 non-null   int64  
+10  loudness          6098 non-null   float64
+11  mode              6098 non-null   int64  
+12  speechiness       6098 non-null   float64
+13  acousticness      6098 non-null   float64
+14  instrumentalness  6098 non-null   float64
+15  liveness          6098 non-null   float64
+16  valence           6098 non-null   float64
+17  tempo             6098 non-null   float64
+18  duration          6098 non-null   float64
+19  time_signature    6098 non-null   int64  
+dtypes: float64(10), int64(5), object(5)
+memory usage: 952.9+ KB</pre>
+				<p>Our data cleaning is complete, and we are ready
+					to convert this into a csv file.</p>
+				<pre><code>music_data.to_csv('spotify_complete.csv')</code></pre>
+
+				<span id="part-4"></span>
+				<hr />
+
+				<!-- Part 4-->
+				<h2>Part 4: Exploring Billboard's Hot 100 Year-End Charts (1960-2020) with visuals</h2>
+				<h3>Exploratory data analysis outline:</h3>
+				<ol>
+					<li>Get a high level understanding of the data (shape, columns, data types,
+						etc.)</li>
+					<li>Comparisons of which artists and songs appear most often on Billboard charts
+					</li>
+					<li>Exploring popularity of songs and seeing if that has an influence on being
+						ranked</li>
+					<li>Looking at other characteristics (danceability, energy, etc.) of songs</li>
+				</ol>
+				<h3>1: Understanding the data</h3>
+				<h4>The data</h4>
+				<p><i>spotify_complete.csv</i> contains every song that
+					has appeared on the Billboard Hot 100 Year-end
+					charts. It contains song information such as the
+					artist(s), year appeared on Billboard, ranking,
+					and audio features. The data was pulled on
+					January 7, 2021.</p>
+				<div class="table-wrapper">
+					<table>
+						<thead>
+							<tr>
+								<th>Column</th>
+								<th>Definition</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>rank</td>
+								<td>ranking of the song on Billboard</td>
+							</tr>
+							<tr>
+								<td>title</td>
+								<td>the name of the song</td>
+							</tr>
+							<tr>
+								<td>artist</td>
+								<td>the main artist who performed the song</td>
+							</tr>
+							<tr>
+								<td>other artists</td>
+								<td>other artists who performed the song</td>
+							</tr>
+							<tr>
+								<td>year</td>
+								<td>year that the song has appeared on the Billboard chart</td>
+							</tr>
+							<tr>
+								<td>Spotify id</td>
+								<td>spotify ID of the song</td>
+							</tr>
+							<tr>
+								<td>Popularity</td>
+								<td>popularity of the song at the time when data was extracted</td>
+							</tr>
+							<tr>
+								<td>danceability</td>
+								<td>how suitable a song is for dancing</td>
+							</tr>
+							<tr>
+								<td>energy</td>
+								<td>measure of intensity and activity</td>
+							</tr>
+							<tr>
+								<td>key</td>
+								<td>key of the song</td>
+							</tr>
+							<tr>
+								<td>loudness</td>
+								<td>overall loudness in decibels</td>
+							</tr>
+							<tr>
+								<td>modality</td>
+								<td>modality of song (0 = Minor, 1 = Major)</td>
+							</tr>
+							<tr>
+								<td>speechiness</td>
+								<td>overall measure of spoken words</td>
+							</tr>
+							<tr>
+								<td>acousticness</td>
+								<td>measure of whether the song is acoustic</td>
+							</tr>
+							<tr>
+								<td>instrumentalness</td>
+								<td>measure of whether the song contains vocals</td>
+							</tr>
+							<tr>
+								<td>liveness</td>
+								<td>probability the song was performed live</td>
+							</tr>
+							<tr>
+								<td>valence</td>
+								<td>measure of musical positiveness</td>
+							</tr>
+							<tr>
+								<td>tempo</td>
+								<td>overall estimated speed or pace of song in beats per minute</td>
+							</tr>
+							<tr>
+								<td>duration</td>
+								<td>how long the song is in seconds</td>
+							</tr>
+							<tr>
+								<td>time_signature</td>
+								<td>overall time signature of a song</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<p>More information on Spotify's audio features:
+					<a
+						href="https://developer.spotify.com/documentation/web-api/reference/tracks/get-audio-features/">https://developer.spotify.com/documentation/web-api/reference/tracks/get-audio-features/</a>
+				</p>
+				<h4>Importing libraries that we will use:</h4>
+				<pre><code>import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns</code></pre>
+				<pre><code># Loading the data
+df = pd.read_csv('spotify_complete.csv', encoding='ISO-8859-1')
+df.drop("Unnamed: 0", axis=1, inplace=True) # this is an index column that we already have</code></pre>
+				<pre><code>df.shape</code></pre>
+				<pre>(6089, 20)</pre>
+				<p>Next, we'll take a look at the data and its properties
+					to understand what we're working with.</p>
+				<div class="table-wrapper">
+					<table>
+						<thead>
+							<tr>
+								<th></th>
+								<th>rank</th>
+								<th>title</th>
+								<th>artist</th>
+								<th>other artists</th>
+								<th>year</th>
+								<th>Spotify id</th>
+								<th>Popularity</th>
+								<th>danceability</th>
+								<th>energy</th>
+								<th>key</th>
+								<th>loudness</th>
+								<th>mode</th>
+								<th>speechiness</th>
+								<th>acousticness</th>
+								<th>instrumentalness</th>
+								<th>liveness</th>
+								<th>valence</th>
+								<th>tempo</th>
+								<th>duration</th>
+								<th>time_signature</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>0</td>
+								<td>1</td>
+								<td>Theme from A Summer Place</td>
+								<td>Percy Faith</td>
+								<td>None</td>
+								<td>1960</td>
+								<td>6zwvB879PJSpTyFcg2wwnL</td>
+								<td>57</td>
+								<td>0.326</td>
+								<td>0.3260</td>
+								<td>0</td>
+								<td>-15.144</td>
+								<td>1</td>
+								<td>0.0297</td>
+								<td>0.59100</td>
+								<td>0.918000</td>
+								<td>0.4940</td>
+								<td>0.870</td>
+								<td>186.232</td>
+								<td>142.693</td>
+								<td>3</td>
+							</tr>
+							<tr>
+								<td>1</td>
+								<td>2</td>
+								<td>He'll Have to Go</td>
+								<td>Jim Reeves</td>
+								<td>None</td>
+								<td>1960</td>
+								<td>7dDE59NX0n466e705E8Itz</td>
+								<td>18</td>
+								<td>0.469</td>
+								<td>0.2440</td>
+								<td>1</td>
+								<td>-15.702</td>
+								<td>1</td>
+								<td>0.0357</td>
+								<td>0.97400</td>
+								<td>0.016200</td>
+								<td>0.8450</td>
+								<td>0.577</td>
+								<td>88.271</td>
+								<td>134.333</td>
+								<td>3</td>
+							</tr>
+							<tr>
+								<td>...</td>
+								<td>...</td>
+								<td>...</td>
+								<td>...</td>
+								<td>...</td>
+								<td>...</td>
+								<td>...</td>
+								<td>...</td>
+								<td>...</td>
+								<td>...</td>
+								<td>...</td>
+								<td>...</td>
+								<td>...</td>
+								<td>...</td>
+								<td>...</td>
+								<td>...</td>
+								<td>...</td>
+								<td>...</td>
+								<td>...</td>
+								<td>...</td>
+								<td>...</td>
+							</tr>
+							<tr>
+								<td>6099</td>
+								<td>99</td>
+								<td>Slide</td>
+								<td>H.E.R.</td>
+								<td>YG</td>
+								<td>2020</td>
+								<td>2rTnVB1bvwxHtaIl4uVu7f</td>
+								<td>77</td>
+								<td>0.827</td>
+								<td>0.4690</td>
+								<td>10</td>
+								<td>-9.141</td>
+								<td>0</td>
+								<td>0.3410</td>
+								<td>0.08070</td>
+								<td>0.000008</td>
+								<td>0.2070</td>
+								<td>0.196</td>
+								<td>97.028</td>
+								<td>238.321</td>
+								<td>4</td>
+							</tr>
+							<tr>
+								<td>6100</td>
+								<td>100</td>
+								<td>Walk Em Down</td>
+								<td>NLE Choppa</td>
+								<td>Roddy Ricch</td>
+								<td>2020</td>
+								<td>4cSSL3YafYjM3yjgFO1vJg</td>
+								<td>80</td>
+								<td>0.867</td>
+								<td>0.7440</td>
+								<td>2</td>
+								<td>-5.171</td>
+								<td>1</td>
+								<td>0.2270</td>
+								<td>0.26800</td>
+								<td>0.000000</td>
+								<td>0.0713</td>
+								<td>0.645</td>
+								<td>84.005</td>
+								<td>173.288</td>
+								<td>4</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<p></p>
+				<pre><code>df.info()</code></pre>
+				<pre>&#60class 'pandas.core.frame.DataFrame'>
+RangeIndex: 6098 entries, 0 to 6097
+Data columns (total 20 columns):
+#   Column            Non-Null Count  Dtype  
+---  ------            --------------  -----  
+0   rank              6098 non-null   int64  
+1   title             6098 non-null   object 
+2   artist            6098 non-null   object 
+3   other artists     6098 non-null   object 
+4   year              6098 non-null   int64  
+5   Spotify id        6098 non-null   object 
+6   Popularity        6098 non-null   int64  
+7   danceability      6098 non-null   float64
+8   energy            6098 non-null   float64
+9   key               6098 non-null   int64  
+10  loudness          6098 non-null   float64
+11  mode              6098 non-null   int64  
+12  speechiness       6098 non-null   float64
+13  acousticness      6098 non-null   float64
+14  instrumentalness  6098 non-null   float64
+15  liveness          6098 non-null   float64
+16  valence           6098 non-null   float64
+17  tempo             6098 non-null   float64
+18  duration          6098 non-null   float64
+19  time_signature    6098 non-null   int64  
+dtypes: float64(10), int64(6), object(4)
+memory usage: 952.9+ KB</pre>
+				<pre><code>df.describe()</code></pre>
+				<div class="table-wrapper">
+					<table>
+						<thead>
+							<tr>
+								<th></th>
+								<th>rank</th>
+								<th>year</th>
+								<th>Popularity</th>
+								<th>danceability</th>
+								<th>energy</th>
+								<th>key</th>
+								<th>loudness</th>
+								<th>mode</th>
+								<th>speechiness</th>
+								<th>acousticness</th>
+								<th>instrumentalness</th>
+								<th>liveness</th>
+								<th>valence</th>
+								<th>tempo</th>
+								<th>duration</th>
+								<th>time_signature</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>count</td>
+								<td>6098.000000</td>
+								<td>6098.000000</td>
+								<td>6098.000000</td>
+								<td>6098.000000</td>
+								<td>6098.000000</td>
+								<td>6098.000000</td>
+								<td>6098.000000</td>
+								<td>6098.000000</td>
+								<td>6098.000000</td>
+								<td>6098.000000</td>
+								<td>6098.000000</td>
+								<td>6098.000000</td>
+								<td>6098.000000</td>
+								<td>6098.000000</td>
+								<td>6098.000000</td>
+								<td>6098.000000</td>
+							</tr>
+							<tr>
+								<td>mean</td>
+								<td>50.491801</td>
+								<td>1989.998196</td>
+								<td>57.206789</td>
+								<td>0.627328</td>
+								<td>0.620230</td>
+								<td>5.290095</td>
+								<td>-8.403208</td>
+								<td>0.692358</td>
+								<td>0.072196</td>
+								<td>0.260426</td>
+								<td>0.028466</td>
+								<td>0.178272</td>
+								<td>0.604125</td>
+								<td>119.430655</td>
+								<td>231.916182</td>
+								<td>3.955395</td>
+							</tr>
+							<tr>
+								<td>std</td>
+								<td>28.869856</td>
+								<td>17.612298</td>
+								<td>17.275689</td>
+								<td>0.151422</td>
+								<td>0.190002</td>
+								<td>3.589750</td>
+								<td>3.545482</td>
+								<td>0.461555</td>
+								<td>0.077274</td>
+								<td>0.259243</td>
+								<td>0.128605</td>
+								<td>0.149371</td>
+								<td>0.239647</td>
+								<td>27.478116</td>
+								<td>63.693433</td>
+								<td>0.272839</td>
+							</tr>
+							<tr>
+								<td>min</td>
+								<td>1.000000</td>
+								<td>1960.000000</td>
+								<td>0.000000</td>
+								<td>0.000000</td>
+								<td>0.000020</td>
+								<td>0.000000</td>
+								<td>-26.113000</td>
+								<td>0.000000</td>
+								<td>0.000000</td>
+								<td>0.000024</td>
+								<td>0.000000</td>
+								<td>0.015000</td>
+								<td>0.000000</td>
+								<td>0.000000</td>
+								<td>29.688000</td>
+								<td>0.000000</td>
+							</tr>
+							<tr>
+								<td>25%</td>
+								<td>25.250000</td>
+								<td>1975.000000</td>
+								<td>47.000000</td>
+								<td>0.532000</td>
+								<td>0.484000</td>
+								<td>2.000000</td>
+								<td>-10.703750</td>
+								<td>0.000000</td>
+								<td>0.032200</td>
+								<td>0.043225</td>
+								<td>0.000000</td>
+								<td>0.085700</td>
+								<td>0.418000</td>
+								<td>98.942250</td>
+								<td>193.390250</td>
+								<td>4.000000</td>
+							</tr>
+							<tr>
+								<td>50%</td>
+								<td>50.000000</td>
+								<td>1990.000000</td>
+								<td>60.000000</td>
+								<td>0.642000</td>
+								<td>0.634000</td>
+								<td>5.000000</td>
+								<td>-7.817000</td>
+								<td>1.000000</td>
+								<td>0.041800</td>
+								<td>0.166000</td>
+								<td>0.000004</td>
+								<td>0.122000</td>
+								<td>0.623000</td>
+								<td>118.029000</td>
+								<td>228.000000</td>
+								<td>4.000000</td>
+							</tr>
+							<tr>
+								<td>75%</td>
+								<td>75.000000</td>
+								<td>2005.000000</td>
+								<td>70.000000</td>
+								<td>0.734000</td>
+								<td>0.770000</td>
+								<td>8.000000</td>
+								<td>-5.652250</td>
+								<td>1.000000</td>
+								<td>0.069300</td>
+								<td>0.418750</td>
+								<td>0.000341</td>
+								<td>0.226000</td>
+								<td>0.809000</td>
+								<td>134.185500</td>
+								<td>261.900250</td>
+								<td>4.000000</td>
+							</tr>
+							<tr>
+								<td>max</td>
+								<td>100.000000</td>
+								<td>2020.000000</td>
+								<td>100.000000</td>
+								<td>0.988000</td>
+								<td>0.997000</td>
+								<td>11.000000</td>
+								<td>-1.101000</td>
+								<td>1.000000</td>
+								<td>0.911000</td>
+								<td>0.991000</td>
+								<td>0.964000</td>
+								<td>0.991000</td>
+								<td>0.991000</td>
+								<td>233.429000</td>
+								<td>1561.133000</td>
+								<td>5.000000</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<p></p>
+				<h3>2: Comparing frequency of songs and artists</h3>
+				<b>Which artists have appeared on the Billboard charts most often?</b>
+				<pre><code># count number of unique, main artists
+df['artist'].nunique()</code></pre>
+				<pre>2368</pre>
+				<span class="image fit2">
+					<img src="images/billboard/common-artists-barchart.png" alt="" /></span>
+				<p>It is important to note that these counts are based
+					on the artists being the main artist of their
+					respective song. It does not take into account
+					that the artists could be featured in a song
+					with other singers. Nevertheless, most of these artists
+					are pop artists.</p>
+				<p>Let's check what the highest ranking that these artists have ever obtained.</p>
+				<pre>
+Drake              1
+Elton John         1
+Mariah Carey       1
+The Beatles        1
+Usher              1
+Madonna            2
+Michael Jackson    2
+Rihanna            2
+Janet Jackson      3
+Taylor Swift       5
+Name: rank, dtype: int64</pre>
+				<p>Half of these artists have achieved rank #1 in the
+					history of Billboard Year-End charts. The other
+					half are very close, having ranked at least
+					top 5.</p>
+				<b>How do songs that were performed solo compare
+					to those performed by multiple artists?</b>
+				<p>The next thing I want to take a look at is to observe
+					the percentage of songs that were performed
+					solo by a single artist versus the percentage
+					of songs that were performed with multiple
+					artists.</p>
+				<pre><code># counts number of songs that don't have other performing artists 
+# (in other words, count songs with a single performer)
+df[df['other artists'] != "None"]["other artists"].count()
+</code></pre>
+				<pre>1220</pre>
+				<span class="image fit2">
+					<img src="images/billboard/amount-singers-piechart.png" alt="" /></span>
+				<p>Interestingly enough, the majority of the songs that
+					appeared on the Billboard Year-End charts are those
+					that were performed with multiple performers.</p>
+				<b>Are there songs that have appeared most often on
+					Billboard charts?</b>
+				<pre>artist               title                     
+3 Doors Down         Here Without You              2
+						Kryptonite                    2
+5 Seconds of Summer  Youngblood                    2
+69 Boyz              Tootsee Roll                  2
+98 Degrees           Because of You                2
+Aaliyah              The One I Gave My Heart To    2
+Ace of Base          All That She Wants            2
+Adele                Hello                         2
+						Rolling in the Deep           2
+Akon                 Smack That                    2
+dtype: int64</pre>
+				<p>Seems like the most amount of times that a song can
+					occur on the Billboard Year-End charts is just 2.
+					There isn't much else we can analyze from here
+					so let's move on.</p>
+				<h3>3: Exploring the popularity field</h3>
+				<b>What are the most and least popular songs?</b>
+				<p>Top 10 most popular songs:</p>
+				<span class="image fit">
+					<img src="images/billboard/most-popular-songs-table.png" alt="" /></span>
+				<p>Top 10 least popular songs:</p>
+				<span class="image fit">
+					<img src="images/billboard/least-popular-songs-table.png" alt="" /></span>
+				<p>The most popular songs are those that appeared on the Billboard chart of 2020.
+					The last popular songs all appeared on charts before 2000 and have a popularity
+					score of 0.
+				</p>
+				<b>How does popularity of songs change by year?</b>
+				<span class="image fit2">
+					<img src="images/billboard/popularity-by-year-barchart.png" alt="" /></span>
+				<p>From the barplot above, we can see that songs generally
+					get more popular as the year increases.</p>
+				<b>Key points to make:</b>
+				<p>First, it looks like the most popular songs were those
+					that appeared on the Billboard charts for 2020.
+					This makes sense as the data was extracted around
+					the time that Billboard released their 2020 Year-End
+					chart, and the measure of the Popularity field is
+					based on how popular the song was at the time the
+					data was extracted.</p>
+				<p>Second, the least popular songs were those that appeared
+					on older Billboard charts, mainly in years before 2000.
+					Again, based on the date of when the data was
+					extracted, we expect that older songs will not be as
+					popular as newly released songs.</p>
+				<p>Since the data was extracted on January 7, 2021, we will focus
+					on exploring the popularity of songs that appeared
+					in the 2020 Year-End chart. We will then see if there
+					how popularity is distributed among these songs.</p>
+				<b>Does Billboard's 2020 Year-End chart really take into
+					account of a song's popularity for rankings?</b>
+				<span class="image fit2">
+					<img src="images/billboard/popularity-2020-histogram.png" alt="" /></span>
+				<p>A lot of these songs are quite popular! The lowest
+					popularity score is only in the 70s. It may seem like
+					Billboard really does take into account of a song's
+					popularity for ranking songs that appear in their
+					charts. Out of curiosity, let's see which songs
+					were the most and least popular of 2020.</p>
+				<p>Most popular songs of 2020:</p>
+				<span class="image fit">
+					<img src="images/billboard/most-popular-songs-2020-table.png" alt="" /></span>
+				<p>Least popular songs of 2020:</p>
+				<span class="image fit">
+					<img src="images/billboard/least-popular-songs-2020-table.png" alt="" /></span>
+				<b>What is the correlation between ranking and popularity?</b>
+				<p>One more thing I'd like to explore is if there is some
+					association between the popularity of a song and the
+					rank it gets on the Billboard charts. Since the
+					popularity field is largely determined by when the
+					data was pulled, it would make most sense to just
+					limit our observation to the 2020 Year-End chart.</p>
+				<span class="image fit">
+					<img src="images/billboard/popularity-vs-ranking-scatterplot.png" alt="" /></span>
+				<pre><code># correlation coefficient between ranking and popularity
+round(abs(df[df['year'] == 2020]['rank'].corr(df[df['year'] == 2020]['Popularity'])),2)</code></pre>
+				<pre>0.49</pre>
+				<p>With a correlation coefficient of <strong>r = 0.49</strong>, there is a
+					moderately strong relationship between the popularity
+					of a song and how high it ranks on the Billboard
+					Year-End charts. That is, the higher popularity a song
+					is, the higher rank it is on the chart. Popularity does
+					have some role on affecting how high a song will rank on the chart.</p>
+				<h3>4: Exploring the audio features</h3>
+				<p>Let's explore the audio features of each Billboard song
+					and see how they are distributed and if they have any
+					correlations with other fields.</p>
+				<b>How are audio features correlated with themselves and with year/rank?</b>
+				<span class="image fit2">
+					<img src="images/billboard/audio-vs-rankyear-table.png" alt="" /></span>
+				<span class="image fit2">
+					<img src="images/billboard/correlation-features-heatmaps.png" alt="" /></span>
+				<div class="row">
+					<div class="col-6 col-12-small">
+						<p></p>
+						<b>Key takeaways from audio features versus other audio features:</b>
+						<ul>
+							<li>Strongest correlations occur with energy
+								vs. loudness, where songs with higher energy
+								are generally associated with songs with
+								higher loudness.</li>
+							<li>Moderate correlations occur with valence
+								vs. danceability, and valence vs. energy.</li>
+							<li>All other correlations have weak correlations.</li>
+						</ul>
+						<b>Comparing audio features versus year:</b>
+						<ul>
+							<li>The only features with (moderately) strong
+								positive correlations with year are loudness,
+								energy, and danceability. That is, as the
+								year increases, music tends to be more
+								loud, energetic, and have higher
+								danceability to their songs.</li>
+							<li>One feature, acousticness, seems to have the
+								lowest correlation with year. As the year
+								increases, songs somewhat tend to have
+								less of an acoustic style to them.</li>
+						</ul>
+						<b>Comparing audio features versus rankings:</b>
+						<ul>
+							<li>There are no correlations whatsoever between
+								the features of a song versus ranking.
+								It seems like the characteristics of songs
+								have no affect on how they get ranked
+								on the Billboard charts.</li>
+						</ul>
+
+					</div>
+				</div>
+				<h4>Distribution of audio features</h4>
+				<b>What audio features are most common? How are they all distributed?</b>
+				<p></p>
+				<span class="image fit2">
+					<img src="images/billboard/audio-distributions.png" alt="" /></span>
+				<div class="row">
+					<div class="col-6 col-12-small">
+						<p></p>
+						<b>Key takeaways</b>
+						<ul>
+							<li>Danceability, energy, tempo, and
+								loudness seems to be the most
+								normally distributed features</li>
+							<li>Most songs are played in a 4/4 time signature</li>
+							<li>Songs on the Billboard charts tend
+								to score low on its speechiness,
+								liveness, and acousticness</li>
+							<li>Almost all songs have a very low
+								instrumentalness score, meaning
+								most songs contain vocal tracks</li>
+						</ul>
+					</div>
+				</div>
+				<h2>Conclusion</h2>
+				<p>I was initially interested in seeing how Billboard chooses
+					what songs to rank on their charts and what the
+					characteristics of these songs were. After exploring
+					the data, it seems that the most common artists were
+					singers in the Pop genre, with singers like Madonna
+					and Rihanna taking most of the spots in the Billboard
+					charts. Most of the songs were performed with other
+					singers rather than solo.</p>
+				<p>Exploring the popularity of the songs was most intriguing
+					to me as the analysis did seem to show that Billboard does
+					tend to choose popular songs, as they claimed. I was also
+					fascinated by looking at the characteristics of the songs.
+					Newer released songs tend to be more popular than older
+					songs. Newer songs are also generally louder, more
+					energetic, and danceable than older songs, which really
+					shows how music in general has changed over time.</p>
+
+
+
+			</div>
 		</section>
 
 		<!-- Section -->
