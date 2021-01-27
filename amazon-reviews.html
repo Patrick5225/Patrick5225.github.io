@@ -27,16 +27,14 @@
 </style>
 
 <script>
-	window.
-
-		// Hides button until scroll to outline
-		window.onscroll = function () {
-			if (document.body.ScrollTop >= 1000 || document.documentElement.scrollTop > 1000) {
-				document.getElementById("btnScrollToTop").style.visibility = "visible"
-			} else {
-				document.getElementById("btnScrollToTop").style.visibility = "hidden";
-			}
-		};
+	// Hides button until scroll to outline
+	window.onscroll = function () {
+		if (document.body.ScrollTop >= 1000 || document.documentElement.scrollTop > 1000) {
+			document.getElementById("btnScrollToTop").style.visibility = "visible"
+		} else {
+			document.getElementById("btnScrollToTop").style.visibility = "hidden";
+		}
+	};
 </script>
 
 <body class="is-preload">
@@ -133,7 +131,7 @@
 						<tbody>
 							<tr>
 								<td>rating</td>
-								<td>Rating of the product on a 5-star rating sytem</td>
+								<td>Rating of the product on a 5-star rating system</td>
 							</tr>
 							<tr>
 								<td>date</td>
