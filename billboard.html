@@ -293,7 +293,8 @@ for year in range(1960,2020):
 				<span id="part-2"></span>
 				<hr />
 
-				<h2>2. Extracting Spotify Ids (using Spotify's API) and cleaning data</h2>
+				<!-- Part 2 -->
+				<h2>Part 2: Extracting Spotify Ids (using Spotify's API) and cleaning data</h2>
 
 				<p>In this part, Spotify URIs (Spotify ids) will be extracted using
 					web developer tools from Spotify's Web API. With these Spotify
@@ -303,6 +304,16 @@ for year in range(1960,2020):
 						href="https://developer.spotify.com/documentation/web-api/">https://developer.spotify.com/documentation/web-api/</a>
 				</p>
 
+				<b>Imports:</b>
+				<pre><code>import pandas as pd
+
+# for using Spotify Web API
+import spotipy
+from spotipy.oauth2 import SpotifyClientCredentials
+</code></pre>
+				<p>Start by reading the csv file we used for web scraping songs and artists.</p>
+				<pre><code>music_data = pd.read_csv('wikipedia_scraper.csv', encoding='ISO-8859-1')</code></pre>
+				<p>Taking a look at first 5 rows of csv file:</p>
 				<div class="table-wrapper">
 					<table>
 						<thead>
@@ -350,18 +361,645 @@ for year in range(1960,2020):
 								<td>Mark Dinning</td>
 								<td>1960</td>
 							</tr>
+						</tbody>
+					</table>
+				</div>
+				<h3>Spotify Web API</h3>
+				<p>Before we can start using Spotify's Web API, we need to link Spotify
+					to an application. I already created my own application on the
+					website, and will save the application's client id and client
+					secret to a file I created called <i>Spotify.txt</i>. Then I will
+					save these information so that Spotify can authenticate access
+					to their Web API.</p>
+				<pre><code>file = 'Spotify.txt'
+
+# store client id and client secret
+with open(file,'r') as f: 
+	f = f.read().splitlines()
+	cid = f[0]
+	secret = f[1]
+
+# authenticate requests to the Spotify Web API
+client_credentials_manager = SpotifyClientCredentials(client_id=cid, client_secret=secret)
+sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)</code></pre>
+				<p>With authentication permitted, we will use artist name and song title
+					from our dataframe to attempt and search for the corresponding
+					Spotify URI. After doing so, we obtain the following table:</p>
+				<div class="table-wrapper">
+					<table>
+						<thead>
+							<tr>
+								<th></th>
+								<th>rank</th>
+								<th>title</th>
+								<th>artist</th>
+								<th>year</th>
+								<th>Spotify id</th>
+								<th>Popularity</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>0</td>
+								<td>1</td>
+								<td>Theme from A Summer Place</td>
+								<td>Percy Faith</td>
+								<td>1960</td>
+								<td>6zwvB879PJSpTyFcg2wwnL</td>
+								<td>57.0</td>
+							</tr>
+							<tr>
+								<td>1</td>
+								<td>2</td>
+								<td>He'll Have to Go</td>
+								<td>Jim Reeves</td>
+								<td>1960</td>
+								<td>7dDE59NX0n466e705E8Itz</td>
+								<td>18.0</td>
+							</tr>
+							<tr>
+								<td>2</td>
+								<td>3</td>
+								<td>Cathy's Clown</td>
+								<td>The Everly Brothers</td>
+								<td>1960</td>
+								<td>1MA9StLzlFftLbuqOmoWij</td>
+								<td>52.0</td>
+							</tr>
+							<tr>
+								<td>3</td>
+								<td>4</td>
+								<td>Running Bear</td>
+								<td>Johnny Preston</td>
+								<td>1960</td>
+								<td>1RYznli2VNO7FCbW1Hq4KM</td>
+								<td>39.0</td>
+							</tr>
+							<tr>
+								<td>4</td>
+								<td>5</td>
+								<td>Teen Angel</td>
+								<td>Mark Dinning</td>
+								<td>1960</td>
+								<td>36NPEs4S7ik50NrlzaqoIJ</td>
+								<td>31.0</td>
+							</tr>
 							<tr>
 								<td>...</td>
 								<td>...</td>
 								<td>...</td>
 								<td>...</td>
 								<td>...</td>
+								<td>...</td>
+								<td>...</td>
+							</tr>
+							<tr>
+								<td>6096</td>
+								<td>96</td>
+								<td>More Than My Hometown</td>
+								<td>Morgan Wallen</td>
+								<td>2020</td>
+								<td>0eBXyY4SatzpE7opnzgXvz</td>
+								<td>83.0</td>
+							</tr>
+							<tr>
+								<td>6097</td>
+								<td>97</td>
+								<td>Lovin' on You</td>
+								<td>Luke Combs</td>
+								<td>2020</td>
+								<td>0nYvjcSlCgjcwogQAwIwNp</td>
+								<td>76.0</td>
+							</tr>
+							<tr>
+								<td>6098</td>
+								<td>98</td>
+								<td>Said Sum</td>
+								<td>Moneybagg Yo</td>
+								<td>2020</td>
+								<td>3sKz6Sd72K0ofPWcJPPk6H</td>
+								<td>75.0</td>
+							</tr>
+							<tr>
+								<td>6099</td>
+								<td>99</td>
+								<td>Slide</td>
+								<td>H.E.R. featuring YG</td>
+								<td>2020</td>
+								<td>NaN</td>
+								<td>NaN</td>
+							</tr>
+							<tr>
+								<td>6100</td>
+								<td>100</td>
+								<td>Walk Em Down</td>
+								<td>NLE Choppa featuring Roddy Ricch</td>
+								<td>2020</td>
+								<td>NaN</td>
+								<td>NaN</td>
 							</tr>
 						</tbody>
 					</table>
+					<p>6101 rows × 6 columns</p>
 				</div>
+				<pre><code># Information about data:
+music_data.info()</code></pre>
+				<pre>&#60class 'pandas.core.frame.DataFrame'>
+RangeIndex: 6101 entries, 0 to 6100
+Data columns (total 6 columns):
+#   Column      Non-Null Count  Dtype  
+---  ------      --------------  -----  
+0   rank        6101 non-null   object 
+1   title       6101 non-null   object 
+2   artist      6101 non-null   object 
+3   year        6101 non-null   int64  
+4   Spotify id  4950 non-null   object 
+5   Popularity  4950 non-null   float64
+dtypes: float64(1), int64(1), object(4)
+memory usage: 286.1+ KB</pre>
+				<pre><code># checking for amount of null values in Spotify id column
+music_data['Spotify id'].isnull().sum()</code></pre>
+				<pre>1151</pre>
+				<h3>Splitting the artist column</h3>
+				<p>There are a lot of songs without a Spotify id (1151 total).
+					One reason why the Spotify ids for these songs were not extracted
+					is because the get_spotify_data function does not recognize artists
+					in the artist column that have multiple artists. These data contain
+					strings such as "featuring", "and", and "&", so we'll split the
+					artists into multiple columns that contain the primary artist
+					and featured artists. Then we'll reattempt and get the Spotify ids
+					along with the song popularity.</p>
+				<div class="table-wrapper">
+					<table>
+						<thead>
+							<tr>
+								<th></th>
+								<th>rank</th>
+								<th>title</th>
+								<th>artist</th>
+								<th>other artists</th>
+								<th>year</th>
+								<th>Spotify id</th>
+								<th>Popularity</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>0</td>
+								<td>1</td>
+								<td>Theme from A Summer Place</td>
+								<td>Percy Faith</td>
+								<td>None</td>
+								<td>1960</td>
+								<td>6zwvB879PJSpTyFcg2wwnL</td>
+								<td>57.0</td>
+							</tr>
+							<tr>
+								<td>1</td>
+								<td>2</td>
+								<td>He'll Have to Go</td>
+								<td>Jim Reeves</td>
+								<td>None</td>
+								<td>1960</td>
+								<td>7dDE59NX0n466e705E8Itz</td>
+								<td>18.0</td>
+							</tr>
+							<tr>
+								<td>2</td>
+								<td>3</td>
+								<td>Cathy's Clown</td>
+								<td>The Everly Brothers</td>
+								<td>None</td>
+								<td>1960</td>
+								<td>1MA9StLzlFftLbuqOmoWij</td>
+								<td>52.0</td>
+							</tr>
+							<tr>
+								<td>3</td>
+								<td>4</td>
+								<td>Running Bear</td>
+								<td>Johnny Preston</td>
+								<td>None</td>
+								<td>1960</td>
+								<td>1RYznli2VNO7FCbW1Hq4KM</td>
+								<td>39.0</td>
+							</tr>
+							<tr>
+								<td>4</td>
+								<td>5</td>
+								<td>Teen Angel</td>
+								<td>Mark Dinning</td>
+								<td>None</td>
+								<td>1960</td>
+								<td>36NPEs4S7ik50NrlzaqoIJ</td>
+								<td>31.0</td>
+							</tr>
+							<tr>
+								<td>...</td>
+								<td>...</td>
+								<td>...</td>
+								<td>...</td>
+								<td>...</td>
+								<td>...</td>
+								<td>...</td>
+								<td>...</td>
+							</tr>
+							<tr>
+								<td>6096</td>
+								<td>96</td>
+								<td>More Than My Hometown</td>
+								<td>Morgan Wallen</td>
+								<td>None</td>
+								<td>2020</td>
+								<td>0eBXyY4SatzpE7opnzgXvz</td>
+								<td>83.0</td>
+							</tr>
+							<tr>
+								<td>6097</td>
+								<td>97</td>
+								<td>Lovin' on You</td>
+								<td>Luke Combs</td>
+								<td>None</td>
+								<td>2020</td>
+								<td>0nYvjcSlCgjcwogQAwIwNp</td>
+								<td>76.0</td>
+							</tr>
+							<tr>
+								<td>6098</td>
+								<td>98</td>
+								<td>Said Sum</td>
+								<td>Moneybagg Yo</td>
+								<td>None</td>
+								<td>2020</td>
+								<td>3sKz6Sd72K0ofPWcJPPk6H</td>
+								<td>75.0</td>
+							</tr>
+							<tr>
+								<td>6099</td>
+								<td>99</td>
+								<td>Slide</td>
+								<td>H.E.R.</td>
+								<td>YG</td>
+								<td>2020</td>
+								<td>2rTnVB1bvwxHtaIl4uVu7f</td>
+								<td>77.0</td>
+							</tr>
+							<tr>
+								<td>6100</td>
+								<td>100</td>
+								<td>Walk Em Down</td>
+								<td>NLE Choppa</td>
+								<td>Roddy Ricch</td>
+								<td>2020</td>
+								<td>4cSSL3YafYjM3yjgFO1vJg</td>
+								<td>80.0</td>
+							</tr>
+						</tbody>
+					</table>
+					<p>6101 rows × 7 columns</p>
+					<pre><code># information about data:
+music_data.info()</code></pre>
+					<pre>&#60class 'pandas.core.frame.DataFrame'>
+RangeIndex: 6101 entries, 0 to 6100
+Data columns (total 7 columns):
+#   Column         Non-Null Count  Dtype  
+---  ------         --------------  -----  
+0   rank           6101 non-null   object 
+1   title          6101 non-null   object 
+2   artist         6101 non-null   object 
+3   other artists  6101 non-null   object 
+4   year           6101 non-null   int64  
+5   Spotify id     5690 non-null   object 
+6   Popularity     5690 non-null   float64
+dtypes: float64(1), int64(1), object(5)
+memory usage: 333.8+ KB</pre>
+					<pre><code># check for amount of null values from Spotify id column
+music_data['Spotify id'].isnull().sum()</code></pre>
+					<pre>411</pre>
+					<h3>Dealing with the remaining, missing Spotify ids</h3>
+					<p>We dropped the amount of null values from 1151 to 411.
+						At this point, there's nothing else we can do with python
+						to extract the remaining Spotify ids, so the rest must
+						be done manually (using Excel).</p>
 
-			</div>
+					<p>Below is the Excel file for <i>spotify_ids.csv</i>.
+						We can see that row 7 (with artist Brenda Lee), for example, has missing
+						information.
+					</p>
+					<span class="image fit2">
+						<img src="images/billboard/excel_start.png" alt="" />
+					</span>
+
+					<p>We can then use Excel's filter tool to filter by rows with
+						missing Spotify ids, and then use Spotify to look up the ids for
+						each of these songs.
+					</p>
+					<span class="image fit2">
+						<img src="images/billboard/excel_finished_ids.png" alt="" />
+					</span>
+
+					<p>So most songs should have a Spotify id now. However, in the image
+						below, there are still very few rows with missing information. Also,
+						in column G, some rows have ids that start with "spotify:track:" and other rows
+						without it. We'll add in another column that will remove "spotify:track"
+						in the id, if it exists, and keep all other rows as is with either
+						the original id or blank information using a rather long Excel formula.
+					</p>
+					<span class="image fit2">
+						<img src="images/billboard/excel_blank_confirmation.png" alt="" />
+					</span>
+					<p>To understand the formula used, it checks and searches if the phrase
+						"spotify:track" exists in the cell for G2 or not. If it does,
+						then it will insert the id into a new cell while removing the phrase "spotify:track".
+						If cell G2 does not contain the phrase "spotify:track", then it will check
+						if the cell is blank or not. If the cell is blank, then the new cell will
+						be blank, and if not, then the original id will be inserted into the new cell.
+					</p>
+					<p>As a result of the formula, it will look something like cell I2. We
+						can then use the autofill feature to fill in the rest of the column.
+					</p>
+
+					<span class="image fit2">
+						<img src="images/billboard/excel_formula.png" alt="" />
+					</span>
+
+					<p>After manually inserting Spotify ids and doing some cleaning
+						in Excel, we import the csv file.</p>
+					<pre>
+<code>new_music_data = pd.read_csv('spotify_ids.csv', encoding='ISO-8859-1')</code>
+</pre>
+					<pre><code># information about data
+new_music_data.info()</code></pre>
+					<pre>&#60class 'pandas.core.frame.DataFrame'>
+RangeIndex: 6101 entries, 0 to 6100
+Data columns (total 9 columns):
+#   Column         Non-Null Count  Dtype  
+---  ------         --------------  -----  
+0   Unnamed: 0     6101 non-null   int64  
+1   rank           6101 non-null   object 
+2   title          6101 non-null   object 
+3   artist         6101 non-null   object 
+4   other artists  6101 non-null   object 
+5   year           6101 non-null   int64  
+6   Spotify id     6098 non-null   object 
+7   Popularity     5690 non-null   float64
+8   Spotify id.1   6098 non-null   object 
+dtypes: float64(1), int64(2), object(6)
+memory usage: 429.1+ KB</pre>
+					<pre><code>new_music_data.isnull().sum()</code></pre>
+					<pre>Unnamed: 0         0
+rank               0
+title              0
+artist             0
+other artists      0
+year               0
+Spotify id         3
+Popularity       411
+Spotify id.1       3
+dtype: int64</pre>
+					<p>We see that there are 3 rows without a Spotify id. Let's
+						check what these rows are.
+					</p>
+					<div class="table-wrapper">
+						<table>
+							<thead>
+								<tr>
+									<th></th>
+									<th>Unnamed: 0</th>
+									<th>rank</th>
+									<th>title</th>
+									<th>artist</th>
+									<th>other artists</th>
+									<th>year</th>
+									<th>Spotify id</th>
+									<th>Popularity</th>
+									<th>Spotify id.1</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>2182</td>
+									<td>2182</td>
+									<td>82</td>
+									<td>It's Now or Never</td>
+									<td>John Schneider</td>
+									<td>None</td>
+									<td>1981</td>
+									<td>NaN</td>
+									<td>NaN</td>
+									<td>NaN</td>
+								</tr>
+								<tr>
+									<td>2297</td>
+									<td>2297</td>
+									<td>97</td>
+									<td>Goin' Down</td>
+									<td>Greg Guidry</td>
+									<td>None</td>
+									<td>1982</td>
+									<td>NaN</td>
+									<td>NaN</td>
+									<td>NaN</td>
+								</tr>
+								<tr>
+									<td>3772</td>
+									<td>3772</td>
+									<td>72</td>
+									<td>ESPN Presents The Jock Jam</td>
+									<td>Various Artists</td>
+									<td>None</td>
+									<td>1997</td>
+									<td>NaN</td>
+									<td>NaN</td>
+									<td>NaN</td>
+								</tr>
+							</tbody>
+						</table>
+						<h3>Removing rows with missing information</h3>
+						<p>There are still 3 Spotify ids that are missing.
+							Since these are just a very small portion of our
+							entire dataset, it should be okay to just drop
+							these rows.</p>
+						<p>After dropping the 3 rows, we now have no more rows
+							with missing Spotify ids. We just need to deal with
+							missing Popularity information.</p>
+						<pre><code>new_music_data.isnull().sum()</code></pre>
+						<pre>Unnamed: 0         0
+rank               0
+title              0
+artist             0
+other artists      0
+year               0
+Spotify id         0
+Popularity       408
+Spotify id.1       0
+dtype: int64</pre>
+						<h3>Cleaning dataframe</h3>
+						<p>But first, let's clean the columns with our new dataframe
+							by dropping the index column and old spotify id column,
+							renaming columns, and reordering the columns.
+						</p>
+						<div class="table-wrapper">
+							<table>
+								<thead>
+									<tr>
+										<th></th>
+										<th>rank</th>
+										<th>title</th>
+										<th>artist</th>
+										<th>other artists</th>
+										<th>year</th>
+										<th>Spotify id</th>
+										<th>Popularity</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>0</td>
+										<td>1</td>
+										<td>Theme from A Summer Place</td>
+										<td>Percy Faith</td>
+										<td>None</td>
+										<td>1960</td>
+										<td>6zwvB879PJSpTyFcg2wwnL</td>
+										<td>57.0</td>
+									</tr>
+									<tr>
+										<td>1</td>
+										<td>2</td>
+										<td>He'll Have to Go</td>
+										<td>Jim Reeves</td>
+										<td>None</td>
+										<td>1960</td>
+										<td>7dDE59NX0n466e705E8Itz</td>
+										<td>18.0</td>
+									</tr>
+									<tr>
+										<td>2</td>
+										<td>3</td>
+										<td>Cathy's Clown</td>
+										<td>The Everly Brothers</td>
+										<td>None</td>
+										<td>1960</td>
+										<td>1MA9StLzlFftLbuqOmoWij</td>
+										<td>52.0</td>
+									</tr>
+									<tr>
+										<td>3</td>
+										<td>4</td>
+										<td>Running Bear</td>
+										<td>Johnny Preston</td>
+										<td>None</td>
+										<td>1960</td>
+										<td>1RYznli2VNO7FCbW1Hq4KM</td>
+										<td>39.0</td>
+									</tr>
+									<tr>
+										<td>4</td>
+										<td>5</td>
+										<td>Teen Angel</td>
+										<td>Mark Dinning</td>
+										<td>None</td>
+										<td>1960</td>
+										<td>36NPEs4S7ik50NrlzaqoIJ</td>
+										<td>31.0</td>
+									</tr>
+									<tr>
+										<td>...</td>
+										<td>...</td>
+										<td>...</td>
+										<td>...</td>
+										<td>...</td>
+										<td>...</td>
+										<td>...</td>
+										<td>...</td>
+									</tr>
+									<tr>
+										<td>6096</td>
+										<td>96</td>
+										<td>More Than My Hometown</td>
+										<td>Morgan Wallen</td>
+										<td>None</td>
+										<td>2020</td>
+										<td>0eBXyY4SatzpE7opnzgXvz</td>
+										<td>83.0</td>
+									</tr>
+									<tr>
+										<td>6097</td>
+										<td>97</td>
+										<td>Lovin' on You</td>
+										<td>Luke Combs</td>
+										<td>None</td>
+										<td>2020</td>
+										<td>0nYvjcSlCgjcwogQAwIwNp</td>
+										<td>76.0</td>
+									</tr>
+									<tr>
+										<td>6098</td>
+										<td>98</td>
+										<td>Said Sum</td>
+										<td>Moneybagg Yo</td>
+										<td>None</td>
+										<td>2020</td>
+										<td>3sKz6Sd72K0ofPWcJPPk6H</td>
+										<td>75.0</td>
+									</tr>
+									<tr>
+										<td>6099</td>
+										<td>99</td>
+										<td>Slide</td>
+										<td>H.E.R.</td>
+										<td>YG</td>
+										<td>2020</td>
+										<td>2rTnVB1bvwxHtaIl4uVu7f</td>
+										<td>77.0</td>
+									</tr>
+									<tr>
+										<td>6100</td>
+										<td>100</td>
+										<td>Walk Em Down</td>
+										<td>NLE Choppa</td>
+										<td>Roddy Ricch</td>
+										<td>2020</td>
+										<td>4cSSL3YafYjM3yjgFO1vJg</td>
+										<td>80.0</td>
+									</tr>
+								</tbody>
+							</table>
+							<p>6098 rows × 7 columns</p>
+							<h3>Filling in the missing popularity data</h3>
+							<p>Let's fill in the missing data with popularity
+								information using Spotify's Web API.
+							</p>
+							<pre><code>popularities = []
+
+for id_ in new_music_data['Spotify id']:
+	feature = sp.track(id_)['popularity']
+	popularities.append(feature)
+
+new_music_data['Popularity'] = popularities</code></pre>
+							<pre><code># count amount of missing values
+new_music_data.isnull().sum()</code></pre>
+							<pre>rank             0
+title            0
+artist           0
+other artists    0
+year             0
+Spotify id       0
+Popularity       0
+dtype: int64</pre>
+							<p>There are no more missing values in our dataframe, so
+								let's go ahead and save this into our csv file called
+								<i>spotify_ids.csv.</i>
+							</p>
+
+							<span id="part-3"></span>
+							<hr />
+
+							<h2>Part 3: Extracting Spotify Audio Features
+								(using Spotify's API) to add even more data</h2>
+
+						</div>
 		</section>
 
 		<!-- Section -->
