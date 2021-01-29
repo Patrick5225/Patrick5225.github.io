@@ -76,8 +76,8 @@
 				<h1>Pokémon Go: Case Study in Mathematical Modeling</h1>
 				<p>Third-party models for Pokémon Go are well distributed
 					but fundamentally flawed. Currently, the most accurate predictions are made by full simulations
-					which disagree with the popular, third-party models. This project provides more accurate
-					mathematical models and heuristics. The results find agreement with
+					which disagree with the popular, third-party models. This project aims to provide more accurate
+					mathematical models and heuristics. The results in this project find agreement with
 					simulations, where other models have not.</p>
 			</header>
 
@@ -92,8 +92,139 @@
 							Bottom of Page 52)</li>
 					</a>
 				</ul>
+				<p><strong>Acknowledgment</strong>: A big thank you to all the members of my team and to my advisor,
+					Dr. Jonathan Brown,
+					for helping create this project with me.
+				</p>
 
 				<hr />
+
+				<h2>Comparing Results with Third-Party Results</h2>
+				<h3>Third-Party Best Attack Moveset for Raichu</h3>
+				<p>The best move set for Raichu according to <i>Eurogamer</i> (as of June 11, 2017) is <b>Volt Switch,
+						Wild Charge</b>
+					because the sum of damage per second (dps) of volt switch and dps of wild charge
+					has the largest value sum for a fast move and charged move pair.
+				</p>
+				<p><strong>Note:</strong> After this project was created, the original article from Eurogamer
+					seems to no longer exist, and instead redirects to a different article
+					from the same author.</p>
+
+				<p><strong>Original link to the article:</strong> <a
+						href="https://www.eurogamer.net/articles/2017-11-06-pokemon-go-moves-movesets-move-list-and-highest-dps-attacks">https://www.eurogamer.net/articles/2017-11-06-pokemon-go-moves-movesets-move-list-and-highest-dps-attacks
+					</a>(redirects to a different article from December, 2018)</p>
+
+				<p>Dps was calculated by dividing power by duration of move.</p>
+				<div class="table-wrapper">
+					<table>
+						<thead>
+							<tr>
+								<th>Name</th>
+								<th>Type</th>
+								<th>Basic Attack</th>
+								<th>Charge Attack</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>Raichu</td>
+								<td>Electric</td>
+								<td>Volt Switch (8.7)</td>
+								<td>Brick Break (25)</td>
+							</tr>
+							<tr>
+								<td></td>
+								<td></td>
+								<td>Spark (8.57)</td>
+								<td>Thunder Punch (25)</td>
+							</tr>
+							<tr>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td>Wild Charge (34.62)</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<p>However, there are flaws with these results:</p>
+				<ol>
+					<li>Dps calculation: Does not consider significance of STAB multipliers
+						in calculation
+					</li>
+					<li>Sum of individual dps fast + dps charged: does not consider paired relationship.</li>
+				</ol>
+				<p>Compared to our best move set calculated for Raichu: <b>Spark, Wild Charge</b></p>
+				<div class="table-wrapper">
+					<table>
+						<thead>
+							<tr>
+								<th>Name</th>
+								<th>Type</th>
+								<th>Basic Attack</th>
+								<th>Charge Attack</th>
+								<th>Total DPS for Moveset</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>Raichu</td>
+								<td>Electric</td>
+								<td>Spark</td>
+								<td>Wild Charge</td>
+								<td>22.80822</td>
+							</tr>
+							<tr>
+								<td></td>
+								<td></td>
+								<td>Volt Switch</td>
+								<td>Wild Charge</td>
+								<td>21.66667</td>
+							</tr>
+							<tr>
+								<td></td>
+								<td></td>
+								<td>Spark</td>
+								<td>Thunder Punch</td>
+								<td>18.41221</td>
+							</tr>
+							<tr>
+								<td></td>
+								<td></td>
+								<td>Volt Switch</td>
+								<td>Thunder Punch</td>
+								<td>17.71712</td>
+							</tr>
+							<tr>
+								<td></td>
+								<td></td>
+								<td>Spark</td>
+								<td>Brick Break</td>
+								<td>15.936</td>
+							</tr>
+							<tr>
+								<td></td>
+								<td></td>
+								<td>Volt Switch</td>
+								<td>Brick break</td>
+								<td>15.4616</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<p>Differences being that:</p>
+				<ol>
+					<li>Calculated dps in consideration of STAB multipliers</li>
+					<li>Took in account of paired relationship of fast move, and charged move
+						in dps, rather than taking sum of the individual dps.
+					</li>
+				</ol>
+				<p>Other models such as from <a href="https://pokemon.gameinfo.io/en/pokemon/26-raichu">Pokemon Go
+						Info</a> inaccurately claims that <b>Volt Switch, Wild Charge</b> is the best
+					move set for Raichu because the sum of dps for volt switch and wild charge has the largest value
+					sum. </p>
+
+
 
 				<h2>Overview/Highlights</h2>
 				<h3>Project Poster Board</h3>
@@ -145,6 +276,7 @@
 				<p>Certificate for participation at the Joint Mathematics Meeting, one of the largest
 					mathematics meeting in the world.
 				</p>
+				<a href=""></a>
 				<div class="image fit">
 					<img src="images/jmm_certificate.jpg" alt="" />
 				</div>
