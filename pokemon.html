@@ -1,0 +1,191 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+	<title>Patrick Chao</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<link rel="stylesheet" href="assets/css/main.css" />
+	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+	<link rel="manifest" href="/site.webmanifest">
+</head>
+
+<style>
+	#btnScrollToTop {
+		visibility: hidden;
+		position: fixed;
+		right: 55px;
+		bottom: 25px;
+		border: none;
+		outline: none;
+		cursor: pointer;
+		z-index: 3;
+	}
+</style>
+
+<script>
+	// Hides button until scroll to outline
+	window.onscroll = function () {
+		if (document.body.ScrollTop >= 1000 || document.documentElement.scrollTop > 1000) {
+			document.getElementById("btnScrollToTop").style.visibility = "visible"
+		} else {
+			document.getElementById("btnScrollToTop").style.visibility = "hidden";
+		}
+	};
+</script>
+
+<body class="is-preload">
+
+	<a href="#top" class="button primary icon solid fa-arrow-up" id="btnScrollToTop">
+		<span>Top</span>
+	</a>
+
+	<!-- Header -->
+	<header id="header">
+
+		<!-- Logo -->
+		<div class="logo">
+			<a href="/"><strong>Patrick Chao</strong></a>
+		</div>
+
+		<!-- Nav -->
+		<nav id="nav">
+			<ul>
+				<li><a href="/">Home</a></li>
+				<li class="current"><a href="/#projects">Projects</a></li>
+			</ul>
+		</nav>
+
+	</header>
+
+	<!-- Wrapper -->
+	<div id="wrapper">
+
+		<!-- Section -->
+		<section class="main style1">
+			<div class="image filtered" data-position="center">
+				<img src="images/pokemon/pokemon-logo.jpg" alt="" />
+			</div>
+
+			<span id="top"></span>
+
+			<header class="small">
+				<h1>Pokémon Go: Case Study in Mathematical Modeling</h1>
+				<p>Third-party models for Pokémon Go are well distributed
+					but fundamentally flawed. Currently, the most accurate predictions are made by full simulations
+					which disagree with the popular, third-party models. This project provides more accurate
+					mathematical models and heuristics. The results find agreement with
+					simulations, where other models have not.</p>
+			</header>
+
+			<div class="inner">
+				<h2>Documents for Project Poster Board</h2>
+				<ul>
+					<a href="pokeboard_FINAL.pdf">
+						<li><u>PDF of Project Used for Presentation</u></li>
+					</a>
+					<a href="#part-1">
+						<li><u>Abstract for Undergraduate Poster Session at the MAA Math Conference</u> (Title #136,
+							Bottom of Page 52)</li>
+					</a>
+				</ul>
+
+				<hr />
+
+				<h2>Overview/Highlights</h2>
+				<h3>Project Poster Board</h3>
+				<div class="image fit2">
+					<img src="images/pokemon/model-overview.PNG" alt="" />
+				</div>
+
+				<hr />
+
+				<h3>Raid Moveset Rankings</h3>
+				<p>Rankings of the top Pokemon and moveset to use in raids.
+				</p>
+				<div class="image fit2">
+					<img src="images/pokemon/raid-moveset-rankings.PNG" alt="" />
+				</div>
+
+				<hr />
+
+				<h3>Attacker Moveset Rankings</h3>
+				<p>Ranking of best moves for each Pokemon by total damage per second (DPS)</p>
+				<div class="image fit2">
+					<img src="images/pokemon/attacker-moveset-rankings.PNG" alt="" />
+				</div>
+
+				<hr />
+
+				<h3>Base Attack Numbers</h3>
+				<p>Base Attack Stats for each Pokemon. Below shows an example of using IF and
+					CEILING functions to calculate mu.
+				</p>
+				<div class="image fit2">
+					<img src="images/pokemon/base-attacker-numbers.PNG" alt="" />
+				</div>
+
+				<hr />
+
+				<h3>Defense Delta DPS</h3>
+				<p>Defense Delta DPS for each Pokemon to help calculate best defenders. Below shows an example of using
+					VLOOKUP and
+					HLOOKUP functions.
+				</p>
+				<div class="image fit2">
+					<img src="images/pokemon/def-delta-dps.PNG" alt="" />
+				</div>
+
+				<hr />
+
+				<h3>Certificate</h3>
+				<p>Certificate for participation at the Joint Mathematics Meeting, one of the largest
+					mathematics meeting in the world.
+				</p>
+				<div class="image fit">
+					<img src="images/jmm_certificate.jpg" alt="" />
+				</div>
+
+			</div>
+		</section>
+
+		<!-- Section -->
+		<section class="main style2">
+			<header class="small">
+				<h2>Get in touch</h2>
+				<p>Feel free to contact me for any questions or comments.
+				</p>
+				<footer>
+					<ul class="icons">
+						<li><a href="https://www.linkedin.com/in/pchaoanalyst/"
+								class="icon brands alt fa-linkedin"><span class="label">Phone</span></a></li>
+						<li><a href="https://github.com/Patrick5225" class="icon brands alt fa-github"><span
+									class="label">Phone</span></a></li>
+						<li><a href="mailto:patrickchao9@gmail.com" class="icon solid alt fa-envelope"><span
+									class="label">Email</span></a></li>
+					</ul>
+				</footer>
+		</section>
+	</div>
+
+	</div>
+
+	<!-- Footer -->
+	<footer id="footer">
+		&copy; Copyright 2020-2021. All rights reserved.
+	</footer>
+
+	<!-- Scripts -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/jquery.dropotron.min.js"></script>
+	<script src="assets/js/browser.min.js"></script>
+	<script src="assets/js/breakpoints.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/main.js"></script>
+
+</body>
+
+</html>
