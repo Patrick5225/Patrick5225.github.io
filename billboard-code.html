@@ -22388,8 +22388,44 @@ memory usage: 333.8+ KB
     <div class="jp-InputPrompt jp-InputArea-prompt">
     </div>
     <div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-      <p>After manually inserting Spotify ids and doing some cleaning in Excel, we import the csv file.</p>
+      <p>Below is the Excel file for <i>spotify_ids.csv.</i> We can see that row 7 (with artist Brenda Lee), for
+        example, has missing information.</p>
+      <span class="image fit2">
+        <img src="images/billboard/excel_start.png" alt="" />
+      </span>
+      <p>We can then use Excel's filter tool to filter by rows with
+        missing Spotify ids, and then use Spotify to look up the ids for
+        each of these songs.
+      </p>
+      <span class="image fit2">
+        <img src="images/billboard/excel_finished_ids.png" alt="" />
+      </span>
 
+      <p>So most songs should have a Spotify id now. However, in the image
+        below, there are still very few rows with missing information. Also,
+        in column G, some rows have ids that start with "spotify:track:" and other rows
+        without it. We'll add in another column that will remove "spotify:track"
+        in the id, if it exists, and keep all other rows as is with either
+        the original id or blank information using a rather long Excel formula.
+      </p>
+      <span class="image fit2">
+        <img src="images/billboard/excel_blank_confirmation.png" alt="" />
+      </span>
+      <p>To understand the formula used, it checks and searches if the phrase
+        "spotify:track" exists in the cell for G2 or not. If it does,
+        then it will insert the id into a new cell while removing the phrase "spotify:track".
+        If cell G2 does not contain the phrase "spotify:track", then it will check
+        if the cell is blank or not. If the cell is blank, then the new cell will
+        be blank, and if not, then the original id will be inserted into the new cell.
+      </p>
+      <p>As a result of the formula, it will look something like cell I2. We
+        can then use the autofill feature to fill in the rest of the column.
+      </p>
+
+      <span class="image fit2">
+        <img src="images/billboard/excel_formula.png" alt="" />
+      </span>
+      <p>After manually inserting Spotify ids and doing some cleaning in Excel, we import the csv file.</p>
     </div>
   </div>
   <div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
