@@ -13,7 +13,35 @@
 	<link rel="manifest" href="/site.webmanifest">
 </head>
 
+<style>
+	#btnScrollToTop {
+		visibility: hidden;
+		position: fixed;
+		right: 55px;
+		bottom: 25px;
+		border: none;
+		outline: none;
+		cursor: pointer;
+		z-index: 3;
+	}
+</style>
+
+<script>
+	// Hides button until scroll to outline
+	window.onscroll = function () {
+		if (document.body.ScrollTop >= 700 || document.documentElement.scrollTop > 700) {
+			document.getElementById("btnScrollToTop").style.visibility = "visible"
+		} else {
+			document.getElementById("btnScrollToTop").style.visibility = "hidden";
+		}
+	};
+</script>
+
 <body class="is-preload">
+
+	<a href="#top" class="button primary icon solid fa-arrow-up" id="btnScrollToTop">
+		<span>Top</span>
+	</a>
 
 	<!-- Header -->
 	<header id="header">
@@ -28,7 +56,6 @@
 			<ul>
 				<li class="current"><a href="/">Home</a></li>
 				<!-- li class=""><a href="#about">About Me</a></li -->
-				<!-- li class=""><a href="#skills">Skills</a></li -->
 				<li class=""><a href="projects">Projects</a></li>
 			</ul>
 		</nav>
@@ -61,6 +88,12 @@
 				</p>
 			</header>
 			<div class="inner">
+				<h3>Education</h3>
+				<ul>
+					<li>University of California, Los Angeles (UCLA): <b>Bachelor's Degree in Applied Mathematics</b> (2018-2020)</li>
+					<li>Bakersfield College: <b>Associate's Degree in Computer Science</b> (2015-2018)</li>
+					<li>Bakersfield College: <b>Associate's Degree in Physics</b> (2015-2018)</li>
+				</ul>
 				<h3>Certificates</h3>
 				<ul>
 					<li><a href="https://www.credly.com/badges/c5791721-1c0b-4ecf-aae5-77fdcf44f9a1"> Microsoft Certified: Data Analyst Associate</a></li>
